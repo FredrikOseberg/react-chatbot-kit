@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+build-package:
+  stage: build
+  image: node:latest
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - ./build/
+
+release-package:
+  stage: deploy
+  image: node:latest
+  script:
+    - git config --global user.email "fredrik.no@gmail.com"
+    - git config --global user.name "Fredrik Strand Oseberg"
+    - npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
+    - npm version $CI_COMMIT_TAG
+    - npm publish
+  only:
+    - tags
