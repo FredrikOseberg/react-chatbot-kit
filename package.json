@@ -1,0 +1,43 @@
+{
+  "name": "react-chatbot-kit",
+  "version": "0.0.2",
+  "description": "Fully customizable chatbot kit for react",
+  "main": "build/index.js",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "css-loader": "^3.5.1",
+    "react-util-kit": "0.0.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "build-watch": "webpack --watch"
+  },
+  "author": {
+    "name": "Fredrik Strand Oseberg",
+    "email": "fredrik.no@gmail.com"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.9.0",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "7.9.0",
+    "@babel/plugin-transform-react-jsx": "7.9.4",
+    "@babel/preset-env": "7.9.0",
+    "@babel/preset-react": "7.9.4",
+    "babel-loader": "8.1.0",
+    "prop-types": "15.7.2",
+    "react-svg-loader": "^3.0.3",
+    "style-loader": "^1.1.3",
+    "webpack": "4.42.1",
+    "webpack-cli": "3.3.11"
+  },
+  "peerDependencies": {
+    "react": "16.13.1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FredrikOseberg/react-anim-kit"
+  }
+}
