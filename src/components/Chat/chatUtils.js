@@ -1,23 +1,4 @@
-import { getStoredState } from "../Chatbot/utils";
-
 export const uniqueIdGenerator = () => {
-  const storedState = getStoredState();
-
-  if (storedState) {
-    const lastMessage = storedState.messages[storedState.messages.length - 1];
-
-    let num;
-    if (storedState.messages.length > 0) {
-      num = lastMessage.id;
-    } else {
-      num = 1;
-    }
-
-    return () => {
-      return (num += 1);
-    };
-  }
-
   let num = 1;
   return () => {
     return (num += 1);

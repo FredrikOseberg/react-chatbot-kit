@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Chat from "../Chat/Chat";
+
 import WidgetRegistry from "../WidgetRegistry/WidgetRegistry";
+import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
+
 import { createChatBotMessage } from "../Chat/chatUtils";
 import {
   getCustomStyles,
@@ -30,15 +33,17 @@ const ChatBot = ({ ActionProvider, MessageParser, config }) => {
   const botName = getBotName(config);
 
   return (
-    <Chat
-      state={state}
-      setState={setState}
-      widgetRegistry={widgetRegistry}
-      messageParser={messageParser}
-      customComponents={{ ...customComponents }}
-      botName={botName}
-      customStyles={customStyles}
-    />
+    <ErrorBoundry>
+      <Chat
+        state={state}
+        setState={setState}
+        widgetRegistry={widgetRegistry}
+        messageParser={messageParser}
+        customComponents={{ ...customComponents }}
+        botName={botName}
+        customStyles={{ ...customStyles }}
+      />
+    </ErrorBoundry>
   );
 };
 

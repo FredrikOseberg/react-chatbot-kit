@@ -42,6 +42,7 @@ const Chat = ({
           <UserChatMessage
             message={messageObject.message}
             key={messageObject.id}
+            customComponents={customComponents}
           />
         );
 
@@ -98,25 +99,36 @@ const Chat = ({
   }
 
   return (
-    <div className="chat-container">
-      <div className="chat">
-        <div className="chat-header">Conversation with {botName}</div>
+    <div className="react-chatbot-kit-chat-container">
+      <div className="react-chatbot-kit-chat-inner-container">
+        <div className="react-chatbot-kit-chat-header">
+          Conversation with {botName}
+        </div>
 
-        <div className="chat-message-container" ref={chatContainerRef}>
+        <div
+          className="react-chatbot-kit-chat-message-container"
+          ref={chatContainerRef}
+        >
           {renderMessages()}
           <div style={{ paddingBottom: "15px" }} />
         </div>
 
-        <div className="chat-input-container">
-          <form className="chat-input-form" onSubmit={handleSubmit}>
+        <div className="react-chatbot-kit-chat-input-container">
+          <form
+            className="react-chatbot-kit-chat-input-form"
+            onSubmit={handleSubmit}
+          >
             <input
-              className="chat-input"
+              className="react-chatbot-kit-chat-input"
               placeholder="Write your message here"
               value={input}
               onChange={(e) => setInputValue(e.target.value)}
             />
-            <button className="chat-btn-send" style={customButtonStyle}>
-              <ChatIcon className="chat-btn-send-icon" />
+            <button
+              className="react-chatbot-kit-chat-btn-send"
+              style={customButtonStyle}
+            >
+              <ChatIcon className="react-chatbot-kit-chat-btn-send-icon" />
             </button>
           </form>
         </div>
