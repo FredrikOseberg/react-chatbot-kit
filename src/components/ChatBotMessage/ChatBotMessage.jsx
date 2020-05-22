@@ -26,6 +26,7 @@ const ChatBotMessage = ({
       setTimeout(() => {
         const message = messages.find((message) => message.id === id);
         message.loading = false;
+        message.delay = undefined;
 
         setState((state) => ({ ...state, messages: messages }));
       }, defaultDisableTime);
@@ -44,6 +45,7 @@ const ChatBotMessage = ({
 
   const chatBoxCustomStyles = {};
   const arrowCustomStyles = {};
+
   if (customStyles) {
     chatBoxCustomStyles.backgroundColor = customStyles.backgroundColor;
     arrowCustomStyles.borderRightColor = customStyles.backgroundColor;

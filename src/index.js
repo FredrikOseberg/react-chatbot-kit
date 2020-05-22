@@ -1,6 +1,6 @@
-import ChatBot from "./components/ChatBot/ChatBot";
+import Chatbot from "./components/ChatBot/ChatBot";
 import { createChatBotMessage } from "./components/Chat/chatUtils";
 
-export { ChatBot, createChatBotMessage };
+export { Chatbot, createChatBotMessage };
 
-export default ChatBot;
+export default Chatbot;

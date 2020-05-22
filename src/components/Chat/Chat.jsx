@@ -26,11 +26,9 @@ const Chat = ({
 
   const scrollIntoView = () => {
     setTimeout(() => {
-      chatContainerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }, 0);
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }, 50);
   };
 
   useEffect(() => {
@@ -95,7 +93,7 @@ const Chat = ({
   };
 
   const customButtonStyle = {};
-  if (customStyles) {
+  if (customStyles && customStyles.chatButton) {
     customButtonStyle.backgroundColor = customStyles.chatButton.backgroundColor;
   }
 
@@ -104,9 +102,9 @@ const Chat = ({
       <div className="chat">
         <div className="chat-header">Conversation with {botName}</div>
 
-        <div className="chat-message-container">
+        <div className="chat-message-container" ref={chatContainerRef}>
           {renderMessages()}
-          <div style={{ paddingBottom: "15px" }} ref={chatContainerRef} />
+          <div style={{ paddingBottom: "15px" }} />
         </div>
 
         <div className="chat-input-container">

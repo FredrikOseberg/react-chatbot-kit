@@ -9,7 +9,7 @@ export const getInitialState = (config) => {
   if (config.state) {
     return config.state;
   }
-  return [];
+  return {};
 };
 
 export const getWidgets = (config) => {
@@ -17,4 +17,18 @@ export const getWidgets = (config) => {
     return config.widgets;
   }
   return [];
+};
+
+export const getCustomComponents = (config) => {
+  if (config.customComponents) {
+    return config.customComponents;
+  }
+  return {};
+};
+
+export const getBotName = (config) => {
+  if (config.botName) {
+    return config.botName;
+  }
+  return "Bot";
 };

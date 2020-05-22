@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Chat from "../Chat/Chat";
 import WidgetRegistry from "../WidgetRegistry/WidgetRegistry";
 import { createChatBotMessage } from "../Chat/chatUtils";
-import { getCustomStyles, getInitialState, getWidgets } from "./utils";
+import {
+  getCustomStyles,
+  getInitialState,
+  getWidgets,
+  getCustomComponents,
+  getBotName,
+} from "./utils";
 
 const ChatBot = ({ ActionProvider, MessageParser, config }) => {
   const initialState = getInitialState(config);
@@ -20,6 +26,8 @@ const ChatBot = ({ ActionProvider, MessageParser, config }) => {
   widgets.forEach((widget) => widgetRegistry.addWidget(widget));
 
   const customStyles = getCustomStyles(config);
+  const customComponents = getCustomComponents(config);
+  const botName = getBotName(config);
 
   return (
     <Chat
@@ -27,8 +35,8 @@ const ChatBot = ({ ActionProvider, MessageParser, config }) => {
       setState={setState}
       widgetRegistry={widgetRegistry}
       messageParser={messageParser}
-      customComponents={{ ...config.customComponents }}
-      botName={config.botName}
+      customComponents={{ ...customComponents }}
+      botName={botName}
       customStyles={customStyles}
     />
   );

@@ -52,7 +52,6 @@
 }
 
 .chat-input::placeholder {
-  font-weight: bold;
   color: #585858;
 }
 
