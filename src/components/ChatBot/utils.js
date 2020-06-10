@@ -1,3 +1,5 @@
+import { createChatBotMessage } from "../Chat/chatUtils";
+
 export const getCustomStyles = (config) => {
   if (config.customStyles) {
     return config.customStyles;
@@ -23,7 +25,11 @@ export const getCustomComponents = (config) => {
   if (config.customComponents) {
     return config.customComponents;
   }
-  return {};
+
+  return {
+    botMessageBox: {},
+    chatButton: {},
+  };
 };
 
 export const getBotName = (config) => {
@@ -31,4 +37,22 @@ export const getBotName = (config) => {
     return config.botName;
   }
   return "Bot";
+};
+
+export const validateProps = (config, MessageParser) => {
+  const errors = [];
+  if (!config.initialMessages) {
+    errors.push(
+      "Config must contain property 'initialMessages', and it expects it to be an array of chatbotmessages."
+    );
+  }
+
+  const messageParser = new MessageParser();
+  if (!messageParser["parse"]) {
+    errors.push(
+      "Messageparser must implement the method 'parse', please add this method to your object. The signature is parse(message: string)."
+    );
+  }
+
+  return errors;
 };

@@ -13,7 +13,9 @@ const UserChatMessage = ({ message, customComponents }) => {
     <div className="react-chatbot-kit-user-chat-message-container">
       <ConditionallyRender
         ifTrue={customComponents.userChatMessage}
-        show={<div>Hello </div>}
+        show={callIfExists(customComponents.userChatMessage, {
+          message,
+        })}
         elseShow={
           <div className="react-chatbot-kit-user-chat-message">
             {message}
@@ -22,8 +24,8 @@ const UserChatMessage = ({ message, customComponents }) => {
         }
       />
       <ConditionallyRender
-        ifTrue={customComponents.userIcon}
-        show={<div>Hello</div>}
+        ifTrue={customComponents.userAvatar}
+        show={callIfExists(customComponents.userAvatar)}
         elseShow={
           <div className="react-chatbot-kit-user-avatar">
             <div className="react-chatbot-kit-user-avatar-container">

@@ -19,12 +19,15 @@ const ChatBotMessage = ({
   id,
 }) => {
   const [show, toggleShow] = useState(false);
+
   useEffect(() => {
     const disableLoading = (messages, setState) => {
       let defaultDisableTime = 750;
       if (delay) defaultDisableTime += delay;
       setTimeout(() => {
         const message = messages.find((message) => message.id === id);
+
+        if (!message) return;
         message.loading = false;
         message.delay = undefined;
 
