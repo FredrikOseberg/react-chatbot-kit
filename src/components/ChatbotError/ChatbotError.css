@@ -10,6 +10,7 @@
 
 .react-chatbot-kit-error-header {
   font-size: 1.3rem;
+  color: #1d1d1d;
   margin-bottom: 30px;
 }
 
@@ -22,4 +23,5 @@
   width: 130px;
   text-align: center;
   text-decoration: none;
+  font-size: 1rem;
 }
