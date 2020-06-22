@@ -8,7 +8,6 @@ import UserIcon from "../../assets/icons/user-alt.svg";
 import "./UserChatMessage.css";
 
 const UserChatMessage = ({ message, customComponents }) => {
-  console.log(customComponents);
   return (
     <div className="react-chatbot-kit-user-chat-message-container">
       <ConditionallyRender
