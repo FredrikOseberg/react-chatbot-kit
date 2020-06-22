@@ -35,8 +35,19 @@ const Chat = ({
     scrollIntoView();
   });
 
+  const showAvatar = (messages, index) => {
+    if (index === 0) return true;
+
+    const lastMessage = messages[index - 1];
+
+    if (lastMessage.type === "bot" && !lastMessage.widget) {
+      return false;
+    }
+    return true;
+  };
+
   const renderMessages = () => {
-    return messages.map((messageObject) => {
+    return messages.map((messageObject, index) => {
       if (!botMessage(messageObject))
         return (
           <UserChatMessage
@@ -45,6 +56,13 @@ const Chat = ({
             customComponents={customComponents}
           />
         );
+
+      let withAvatar;
+      if (messageObject.withAvatar) {
+        withAvatar = messageObject.withAvatar;
+      } else {
+        withAvatar = showAvatar(messages, index, messageObject.withAvatar);
+      }
 
       const chatBotMessageProps = {
         passDownProps: { ...messageObject },
@@ -60,6 +78,7 @@ const Chat = ({
           <ChatBotMessageWithWidget
             customStyles={customStyles}
             scrollIntoView={scrollIntoView}
+            withAvatar={withAvatar}
             {...chatBotMessageProps}
             key={messageObject.id}
           />
@@ -70,7 +89,7 @@ const Chat = ({
         <ChatBotMessage
           customStyles={customStyles.botMessageBox}
           key={messageObject.id}
-          withAvatar={true}
+          withAvatar={withAvatar}
           {...chatBotMessageProps.passDownProps}
           customComponents={customComponents}
           messages={messages}

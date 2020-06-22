@@ -12,6 +12,7 @@ const ChatBotMessageWithWidget = ({
   customComponents,
   customStyles,
   widgetRegistry,
+  withAvatar,
 }) => {
   return (
     <Fragment>
@@ -19,6 +20,7 @@ const ChatBotMessageWithWidget = ({
         {...passDownProps}
         customStyles={customStyles.botMessageBox}
         messages={messages}
+        withAvatar={withAvatar}
         setState={setState}
         customComponents={customComponents}
       />

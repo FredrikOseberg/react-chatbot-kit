@@ -4,18 +4,11 @@ class WidgetRegistry {
     this.actionProvider = actionProvider;
   }
 
-  addWidget = ({
-    widgetName,
-    widgetFunc,
-    mapStateToProps,
-    props,
-    updateKey
-  }) => {
+  addWidget = ({ widgetName, widgetFunc, mapStateToProps, props }) => {
     this[widgetName] = {
       widget: widgetFunc,
       props,
       mapStateToProps,
-      updateKey
     };
   };
 
@@ -26,10 +19,10 @@ class WidgetRegistry {
 
     let props = {
       scrollIntoView: state.scrollIntoView,
-      ...widgetObject.props,
+      configProps: widgetObject.props ? [...widgetObject.props] : [],
       ...this.mapStateToProps(widgetObject.mapStateToProps, state),
       setState: this.setState,
-      actionProvider: this.actionProvider
+      actionProvider: this.actionProvider,
     };
 
     if (widgetObject.updateKey) {
