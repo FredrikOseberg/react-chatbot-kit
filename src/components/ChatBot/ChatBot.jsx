@@ -15,14 +15,14 @@ import {
   validateProps,
 } from "./utils";
 
-const ChatBot = ({ ActionProvider, MessageParser, config }) => {
-  if (!config || !ActionProvider || !MessageParser) {
+const Chatbot = ({ actionProvider, messageParser, config }) => {
+  if (!config || !actionProvider || !messageParser) {
     return (
       <ChatbotError message="I think you forgot to feed me some props. Did you remember to pass a config, a messageparser and an actionprovider?" />
     );
   }
 
-  const propsErrors = validateProps(config, MessageParser);
+  const propsErrors = validateProps(config, messageParser);
 
   if (propsErrors.length) {
     const errorMessage = propsErrors.reduce((prev, cur) => {
@@ -44,9 +44,9 @@ const ChatBot = ({ ActionProvider, MessageParser, config }) => {
   const customComponents = getCustomComponents(config);
   const botName = getBotName(config);
 
-  const actionProvider = new ActionProvider(createChatBotMessage, setState);
+  const actionProvider = new actionProvider(createChatBotMessage, setState);
   const widgetRegistry = new WidgetRegistry(setState, actionProvider);
-  const messageParser = new MessageParser(actionProvider);
+  const messageParser = new messageParser(actionProvider);
 
   const widgets = getWidgets(config);
   widgets.forEach((widget) => widgetRegistry.addWidget(widget));
@@ -64,4 +64,4 @@ const ChatBot = ({ ActionProvider, MessageParser, config }) => {
   );
 };
 
-export default ChatBot;
+export default Chatbot;
