@@ -1,6 +1,6 @@
 import React from "react";
 
-import ChatbotMessage from "../ChatBotMessage/ChatBotMessage";
+import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
 
 import "./ChatbotError.css";
 

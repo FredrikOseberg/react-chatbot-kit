@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ConditionallyRender } from "react-util-kit";
 
-import ChatBotMessageAvatar from "./ChatBotMessageAvatar/ChatBotMessageAvatar";
+import ChatbotMessageAvatar from "./ChatbotMessageAvatar/ChatbotMessageAvatar";
 import Loader from "../Loader/Loader";
 
-import "./ChatBotMessage.css";
+import "./ChatbotMessage.css";
 import { callIfExists } from "../Chat/chatUtils";
 
-const ChatBotMessage = ({
+const ChatbotMessage = ({
   message,
   withAvatar,
   loading,
@@ -65,7 +65,7 @@ const ChatBotMessage = ({
               <ConditionallyRender
                 ifTrue={customComponents.botAvatar}
                 show={callIfExists(customComponents.botAvatar)}
-                elseShow={<ChatBotMessageAvatar />}
+                elseShow={<ChatbotMessageAvatar />}
               />
             }
           />
@@ -104,4 +104,4 @@ const ChatBotMessage = ({
   );
 };
 
-export default ChatBotMessage;
+export default ChatbotMessage;

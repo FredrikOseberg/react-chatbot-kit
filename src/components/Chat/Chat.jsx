@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import UserChatMessage from "../UserChatMessage/UserChatMessage";
-import ChatBotMessage from "../ChatBotMessage/ChatBotMessage";
+import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
 import ChatBotMessageWithWidget from "../ChatBotMessageWithWidget/ChatBotMessageWithWidget";
 
 import { botMessage, createChatMessage } from "./chatUtils";
@@ -86,7 +86,7 @@ const Chat = ({
       }
 
       return (
-        <ChatBotMessage
+        <ChatbotMessage
           customStyles={customStyles.botMessageBox}
           key={messageObject.id}
           withAvatar={withAvatar}

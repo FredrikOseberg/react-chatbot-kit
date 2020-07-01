@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 
-import ChatBotMessage from "../ChatBotMessage/ChatBotMessage";
+import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
 import { ConditionallyRender } from "react-util-kit";
 
-const ChatBotMessageWithWidget = ({
+const ChatbotMessageWithWidget = ({
   passDownProps,
   messages,
   setState,
@@ -16,7 +16,7 @@ const ChatBotMessageWithWidget = ({
 }) => {
   return (
     <Fragment>
-      <ChatBotMessage
+      <ChatbotMessage
         {...passDownProps}
         customStyles={customStyles.botMessageBox}
         messages={messages}
@@ -35,4 +35,4 @@ const ChatBotMessageWithWidget = ({
   );
 };
 
-export default ChatBotMessageWithWidget;
+export default ChatbotMessageWithWidget;

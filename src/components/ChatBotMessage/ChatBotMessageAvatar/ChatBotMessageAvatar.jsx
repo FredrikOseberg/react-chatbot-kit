@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChatBotMessageAvatar = () => {
+const ChatbotMessageAvatar = () => {
   return (
     <div className="react-chatbot-kit-chat-bot-avatar">
       <div className="react-chatbot-kit-chat-bot-avatar-container">
@@ -10,4 +10,4 @@ const ChatBotMessageAvatar = () => {
   );
 };
 
-export default ChatBotMessageAvatar;
+export default ChatbotMessageAvatar;
