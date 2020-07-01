@@ -44,9 +44,9 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
   const customComponents = getCustomComponents(config);
   const botName = getBotName(config);
 
-  const actionProvider = new actionProvider(createChatBotMessage, setState);
+  const actionProv = new actionProvider(createChatBotMessage, setState);
   const widgetRegistry = new WidgetRegistry(setState, actionProvider);
-  const messageParser = new messageParser(actionProvider);
+  const messagePars = new messageParser(actionProv);
 
   const widgets = getWidgets(config);
   widgets.forEach((widget) => widgetRegistry.addWidget(widget));
@@ -56,7 +56,7 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
       state={state}
       setState={setState}
       widgetRegistry={widgetRegistry}
-      messageParser={messageParser}
+      messageParser={messagePars}
       customComponents={{ ...customComponents }}
       botName={botName}
       customStyles={{ ...customStyles }}
