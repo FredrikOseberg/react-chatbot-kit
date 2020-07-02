@@ -2,6 +2,10 @@
 
 # Introduction
 
+react-chatbot-kit provides an easy way to get started building chatbots.
+
 ![Alt Text](./skybot.gif)
 
-react-chatbot-kit provides an easy way to get started building chatbots.
+## Documentation
+
+View the documentation here: https://fredrikoseberg.github.io/react-chatbot-kit-docs/
