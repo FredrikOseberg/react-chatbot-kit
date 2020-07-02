@@ -1,13 +1,13 @@
 {
   "name": "react-chatbot-kit",
-  "version": "0.0.14",
-  "description": "Fully customizable chatbot kit for react",
+  "version": "1.0.1",
   "homepage": "https://fredrikoseberg.github.io/react-chatbot-kit-docs/",
+  "description": "Fully customizable chatbot kit for react",
   "main": "build/index.js",
   "dependencies": {
     "classnames": "^2.2.6",
     "css-loader": "^3.5.1",
-    "react-util-kit": "1.0.0"
+    "react-util-kit": "0.0.14"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
