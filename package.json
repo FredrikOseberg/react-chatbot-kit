@@ -2,11 +2,12 @@
   "name": "react-chatbot-kit",
   "version": "0.0.14",
   "description": "Fully customizable chatbot kit for react",
+  "homepage": "https://fredrikoseberg.github.io/react-chatbot-kit-docs/",
   "main": "build/index.js",
   "dependencies": {
     "classnames": "^2.2.6",
     "css-loader": "^3.5.1",
-    "react-util-kit": "0.0.14"
+    "react-util-kit": "1.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -38,6 +39,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FredrikOseberg/react-anim-kit"
+    "url": "https://github.com/FredrikOseberg/react-chatbot-kit"
   }
 }
