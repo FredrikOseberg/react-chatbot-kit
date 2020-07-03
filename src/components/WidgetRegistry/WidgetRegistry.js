@@ -19,16 +19,11 @@ class WidgetRegistry {
 
     let props = {
       scrollIntoView: state.scrollIntoView,
-      configProps: widgetObject.props ? [...widgetObject.props] : [],
+      configProps: widgetObject.props ? { ...widgetObject.props } : {},
       ...this.mapStateToProps(widgetObject.mapStateToProps, state),
       setState: this.setState,
       actionProvider: this.actionProvider,
     };
-
-    if (widgetObject.updateKey) {
-      const { updateKey } = widgetObject;
-      props = { ...props, updateKey };
-    }
 
     return widgetObject.widget(props);
   };
