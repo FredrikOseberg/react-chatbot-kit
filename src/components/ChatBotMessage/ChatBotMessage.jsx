@@ -36,7 +36,7 @@ const ChatbotMessage = ({
     };
 
     disableLoading(messages, setState);
-  }, [delay, id, messages, setState]);
+  }, [delay, id, setState]);
 
   useEffect(() => {
     if (delay) {
