@@ -1,5 +1,3 @@
-import { createChatBotMessage } from "../Chat/chatUtils";
-
 export const getCustomStyles = (config) => {
   if (config.customStyles) {
     return config.customStyles;
@@ -37,6 +35,11 @@ export const getBotName = (config) => {
     return config.botName;
   }
   return "Bot";
+};
+
+export const getObject = (object) => {
+  if (typeof object === "object") return object;
+  return {};
 };
 
 export const validateProps = (config, MessageParser) => {

@@ -1,3 +1,5 @@
+import { getObject } from "../Chatbot/utils";
+
 class WidgetRegistry {
   constructor(setStateFunc, actionProvider) {
     this.setState = setStateFunc;
@@ -19,7 +21,7 @@ class WidgetRegistry {
 
     let props = {
       scrollIntoView: state.scrollIntoView,
-      configProps: widgetObject.props ? { ...widgetObject.props } : {},
+      ...getObject(widgetObject.props),
       ...this.mapStateToProps(widgetObject.mapStateToProps, state),
       setState: this.setState,
       actionProvider: this.actionProvider,
