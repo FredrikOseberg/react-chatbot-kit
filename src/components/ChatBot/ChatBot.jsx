@@ -40,8 +40,6 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
     ...initialState,
   });
 
-  console.log(state.messages);
-
   const customStyles = getCustomStyles(config);
   const customComponents = getCustomComponents(config);
   const botName = getBotName(config);
