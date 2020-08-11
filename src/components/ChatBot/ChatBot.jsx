@@ -46,7 +46,7 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
 
   const actionProv = new actionProvider(createChatBotMessage, setState);
   const widgetRegistry = new WidgetRegistry(setState, actionProv);
-  const messagePars = new messageParser(actionProv);
+  const messagePars = new messageParser(actionProv, state);
 
   const widgets = getWidgets(config);
   widgets.forEach((widget) => widgetRegistry.addWidget(widget));
