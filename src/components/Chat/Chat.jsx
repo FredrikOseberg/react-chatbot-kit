@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { ConditionallyRender } from "react-util-kit";
 
 import UserChatMessage from "../UserChatMessage/UserChatMessage";
 import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
@@ -18,6 +19,8 @@ const Chat = ({
   customComponents,
   botName,
   customStyles,
+  headerText,
+  placeholderText,
 }) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
@@ -117,12 +120,26 @@ const Chat = ({
     customButtonStyle.backgroundColor = customStyles.chatButton.backgroundColor;
   }
 
+  let header = `Conversation with ${botName}`;
+  if (headerText) {
+    header = headerText;
+  }
+
+  let placeholder = "Write your message here";
+  if (placeholderText) {
+    placeHolder = placeholderText;
+  }
+
   return (
     <div className="react-chatbot-kit-chat-container">
       <div className="react-chatbot-kit-chat-inner-container">
-        <div className="react-chatbot-kit-chat-header">
-          Conversation with {botName}
-        </div>
+        <ConditionallyRender
+          ifTrue={customComponents.header}
+          show={customComponents.header && customComponents.header()}
+          elseShow={
+            <div className="react-chatbot-kit-chat-header">{header}</div>
+          }
+        />
 
         <div
           className="react-chatbot-kit-chat-message-container"
@@ -139,7 +156,7 @@ const Chat = ({
           >
             <input
               className="react-chatbot-kit-chat-input"
-              placeholder="Write your message here"
+              placeholder={placeholder}
               value={input}
               onChange={(e) => setInputValue(e.target.value)}
             />
