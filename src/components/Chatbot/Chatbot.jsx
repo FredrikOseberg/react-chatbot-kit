@@ -15,7 +15,13 @@ import {
   validateProps,
 } from "./utils";
 
-const Chatbot = ({ actionProvider, messageParser, config }) => {
+const Chatbot = ({
+  actionProvider,
+  messageParser,
+  config,
+  headerText,
+  placeholderText,
+}) => {
   if (!config || !actionProvider || !messageParser) {
     return (
       <ChatbotError message="I think you forgot to feed me some props. Did you remember to pass a config, a messageparser and an actionprovider?" />
@@ -60,6 +66,8 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
       customComponents={{ ...customComponents }}
       botName={botName}
       customStyles={{ ...customStyles }}
+      headerText={headerText}
+      placeholderText={placeholderText}
     />
   );
 };
