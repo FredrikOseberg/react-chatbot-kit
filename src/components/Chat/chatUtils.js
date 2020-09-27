@@ -1,11 +1,6 @@
-export const uniqueIdGenerator = () => {
-  let num = 1;
-  return () => {
-    return (num += 1);
-  };
+export const uniqueId = () => {
+  return Date.now() * Math.random();
 };
-
-const uniqueId = uniqueIdGenerator();
 
 export const botMessage = (message) => {
   if (message.type === "bot") {
@@ -28,6 +23,10 @@ export const createChatBotMessage = (message, options) => {
     ...options,
     loading: true,
   };
+};
+
+export const createClientMessage = (message) => {
+  return createChatMessage(message, "user");
 };
 
 export const callIfExists = (func, ...args) => {
