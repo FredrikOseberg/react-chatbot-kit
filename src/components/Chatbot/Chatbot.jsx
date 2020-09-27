@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Chat from "../Chat/Chat";
 
@@ -21,6 +21,8 @@ const Chatbot = ({
   config,
   headerText,
   placeholderText,
+  onUnmount,
+  messageHistory,
 }) => {
   if (!config || !actionProvider || !messageParser) {
     return (
@@ -41,10 +43,31 @@ const Chatbot = ({
 
   const initialState = getInitialState(config);
 
+  if (messageHistory && Array.isArray(messageHistory)) {
+    config.initialMessages = [...messageHistory];
+  }
+
   const [state, setState] = useState({
     messages: [...config.initialMessages],
     ...initialState,
   });
+  const messagesRef = useRef(state.messages);
+
+  useEffect(() => {
+    messagesRef.current = state.messages;
+  });
+
+  useEffect(() => {
+    if (messageHistory && Array.isArray(messageHistory)) {
+      setState((prevState) => ({ ...prevState, messages: messageHistory }));
+    }
+
+    return () => {
+      if (onUnmount && typeof onUnmount === "function") {
+        onUnmount(messagesRef.current);
+      }
+    };
+  }, []);
 
   const customStyles = getCustomStyles(config);
   const customComponents = getCustomComponents(config);
