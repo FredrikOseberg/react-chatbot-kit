@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Chat from "../Chat/Chat";
 
 import WidgetRegistry from "../WidgetRegistry/WidgetRegistry";
 import ChatbotError from "../ChatbotError/ChatbotError";
 
-import { createChatBotMessage } from "../Chat/chatUtils";
+import { createChatBotMessage, createClientMessage } from "../Chat/chatUtils";
 import {
   getCustomStyles,
   getInitialState,
@@ -15,7 +15,15 @@ import {
   validateProps,
 } from "./utils";
 
-const Chatbot = ({ actionProvider, messageParser, config }) => {
+const Chatbot = ({
+  actionProvider,
+  messageParser,
+  config,
+  headerText,
+  placeholderText,
+  saveMessages,
+  messageHistory,
+}) => {
   if (!config || !actionProvider || !messageParser) {
     return (
       <ChatbotError message="I think you forgot to feed me some props. Did you remember to pass a config, a messageparser and an actionprovider?" />
@@ -35,16 +43,41 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
 
   const initialState = getInitialState(config);
 
+  if (messageHistory && Array.isArray(messageHistory)) {
+    config.initialMessages = [...messageHistory];
+  }
+
   const [state, setState] = useState({
     messages: [...config.initialMessages],
     ...initialState,
   });
+  const messagesRef = useRef(state.messages);
+
+  useEffect(() => {
+    messagesRef.current = state.messages;
+  });
+
+  useEffect(() => {
+    if (messageHistory && Array.isArray(messageHistory)) {
+      setState((prevState) => ({ ...prevState, messages: messageHistory }));
+    }
+
+    return () => {
+      if (saveMessages && typeof saveMessages === "function") {
+        saveMessages(messagesRef.current);
+      }
+    };
+  }, []);
 
   const customStyles = getCustomStyles(config);
   const customComponents = getCustomComponents(config);
   const botName = getBotName(config);
 
-  const actionProv = new actionProvider(createChatBotMessage, setState);
+  const actionProv = new actionProvider(
+    createChatBotMessage,
+    setState,
+    createClientMessage
+  );
   const widgetRegistry = new WidgetRegistry(setState, actionProv);
   const messagePars = new messageParser(actionProv, state);
 
@@ -60,6 +93,8 @@ const Chatbot = ({ actionProvider, messageParser, config }) => {
       customComponents={{ ...customComponents }}
       botName={botName}
       customStyles={{ ...customStyles }}
+      headerText={headerText}
+      placeholderText={placeholderText}
     />
   );
 };

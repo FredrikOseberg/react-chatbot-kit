@@ -5,7 +5,7 @@ import Chat from "../Chat/Chat";
 import WidgetRegistry from "../WidgetRegistry/WidgetRegistry";
 import ChatbotError from "../ChatbotError/ChatbotError";
 
-import { createChatBotMessage } from "../Chat/chatUtils";
+import { createChatBotMessage, createClientMessage } from "../Chat/chatUtils";
 import {
   getCustomStyles,
   getInitialState,
@@ -21,7 +21,7 @@ const Chatbot = ({
   config,
   headerText,
   placeholderText,
-  onUnmount,
+  saveMessages,
   messageHistory,
 }) => {
   if (!config || !actionProvider || !messageParser) {
@@ -63,8 +63,8 @@ const Chatbot = ({
     }
 
     return () => {
-      if (onUnmount && typeof onUnmount === "function") {
-        onUnmount(messagesRef.current);
+      if (saveMessages && typeof saveMessages === "function") {
+        saveMessages(messagesRef.current);
       }
     };
   }, []);
@@ -73,7 +73,11 @@ const Chatbot = ({
   const customComponents = getCustomComponents(config);
   const botName = getBotName(config);
 
-  const actionProv = new actionProvider(createChatBotMessage, setState);
+  const actionProv = new actionProvider(
+    createChatBotMessage,
+    setState,
+    createClientMessage
+  );
   const widgetRegistry = new WidgetRegistry(setState, actionProv);
   const messagePars = new messageParser(actionProv, state);
 
