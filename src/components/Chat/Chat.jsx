@@ -127,7 +127,7 @@ const Chat = ({
 
   let placeholder = "Write your message here";
   if (placeholderText) {
-    placeHolder = placeholderText;
+    placeholder = placeholderText;
   }
 
   return (
