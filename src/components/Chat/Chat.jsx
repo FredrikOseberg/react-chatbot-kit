@@ -17,6 +17,7 @@ const Chat = ({
   widgetRegistry,
   messageParser,
   customComponents,
+  actionProvider,
   botName,
   customStyles,
   headerText,
@@ -135,7 +136,9 @@ const Chat = ({
       <div className="react-chatbot-kit-chat-inner-container">
         <ConditionallyRender
           ifTrue={customComponents.header}
-          show={customComponents.header && customComponents.header()}
+          show={
+            customComponents.header && customComponents.header(actionProvider)
+          }
           elseShow={
             <div className="react-chatbot-kit-chat-header">{header}</div>
           }
