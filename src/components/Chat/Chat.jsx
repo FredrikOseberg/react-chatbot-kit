@@ -3,7 +3,7 @@ import { ConditionallyRender } from "react-util-kit";
 
 import UserChatMessage from "../UserChatMessage/UserChatMessage";
 import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
-import ChatBotMessageWithWidget from "../ChatBotMessageWithWidget/ChatBotMessageWithWidget";
+import ChatBotMessageWithWidget from "../ChatbotMessageWithWidget/ChatbotMessageWithWidget";
 
 import { botMessage, createChatMessage } from "./chatUtils";
 
