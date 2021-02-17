@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ConditionallyRender } from "react-util-kit";
 
-import ChatbotMessageAvatar from "./ChatBotMessageAvatar/ChatBotMessageAvatar";
+import ChatbotMessageAvatar from "./ChatBotMessageAvatar/ChatbotMessageAvatar";
 import Loader from "../Loader/Loader";
 
 import "./ChatbotMessage.css";
