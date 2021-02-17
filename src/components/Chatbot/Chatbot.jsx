@@ -89,6 +89,7 @@ const Chatbot = ({
       state={state}
       setState={setState}
       widgetRegistry={widgetRegistry}
+      actionProvider={actionProv}
       messageParser={messagePars}
       customComponents={{ ...customComponents }}
       botName={botName}
