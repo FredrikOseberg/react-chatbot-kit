@@ -23,6 +23,7 @@ const Chatbot = ({
   placeholderText,
   saveMessages,
   messageHistory,
+  validator
 }) => {
   if (!config || !actionProvider || !messageParser) {
     return (
@@ -96,6 +97,7 @@ const Chatbot = ({
       customStyles={{ ...customStyles }}
       headerText={headerText}
       placeholderText={placeholderText}
+      validator={validator}
     />
   );
 };

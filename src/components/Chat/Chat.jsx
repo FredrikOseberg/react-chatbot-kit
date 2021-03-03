@@ -22,6 +22,7 @@ const Chat = ({
   customStyles,
   headerText,
   placeholderText,
+  validator,
 }) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
@@ -110,7 +111,13 @@ const Chat = ({
       messages: [...state.messages, createChatMessage(input, "user")],
     }));
 
-    messageParser.parse(input);
+    if (validator && typeof validator === "function") {
+      if (validator()) {
+        messageParser.parse(input);
+      }
+    } else {
+      messageParser.parse(input);
+    }
 
     scrollIntoView();
     setInputValue("");

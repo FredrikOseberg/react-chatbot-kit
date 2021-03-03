@@ -12,7 +12,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
-    "build-watch": "webpack --watch"
+    "build-watch": "webpack --watch",
+    "prepare": "yarn run build"
   },
   "author": {
     "name": "Fredrik Strand Oseberg",
