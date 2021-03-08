@@ -23,7 +23,7 @@ const Chatbot = ({
   placeholderText,
   saveMessages,
   messageHistory,
-  validator
+  validator,
 }) => {
   if (!config || !actionProvider || !messageParser) {
     return (

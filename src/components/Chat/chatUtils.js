@@ -1,5 +1,5 @@
 export const uniqueId = () => {
-  return Date.now() * Math.random();
+  return Math.round(Date.now() * Math.random());
 };
 
 export const botMessage = (message) => {
