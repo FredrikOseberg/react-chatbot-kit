@@ -112,7 +112,7 @@ const Chat = ({
     }));
 
     if (validator && typeof validator === "function") {
-      if (validator()) {
+      if (validator(input)) {
         messageParser.parse(input);
       }
     } else {
