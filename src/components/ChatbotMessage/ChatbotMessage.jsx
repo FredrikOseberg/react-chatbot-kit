@@ -24,19 +24,29 @@ const ChatbotMessage = ({
     const disableLoading = (messages, setState) => {
       let defaultDisableTime = 750;
       if (delay) defaultDisableTime += delay;
+
       setTimeout(() => {
-        const message = messages.find((message) => message.id === id);
+        const newMessages = [...messages];
+        const message = newMessages.find((message) => message.id === id);
 
         if (!message) return;
         message.loading = false;
         message.delay = undefined;
 
-        setState((state) => ({ ...state, messages: messages }));
+        setState((state) => {
+          const freshMessages = state.messages;
+          const messageIdx = freshMessages.findIndex(
+            (message) => message.id === id
+          );
+          freshMessages[messageIdx] = message;
+
+          return { ...state, messages: freshMessages };
+        });
       }, defaultDisableTime);
     };
 
     disableLoading(messages, setState);
-  }, [delay, id, setState]);
+  }, [delay, id]);
 
   useEffect(() => {
     if (delay) {
