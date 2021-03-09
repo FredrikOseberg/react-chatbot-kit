@@ -109,14 +109,12 @@ const Chat = ({
 
     if (validator && typeof validator === "function") {
       if (validator(input)) {
-        messageParser.parse(input);
-
         handleValidMessage();
+        messageParser.parse(input);
       }
     } else {
-      messageParser.parse(input);
-
       handleValidMessage();
+      messageParser.parse(input);
     }
   };
 
