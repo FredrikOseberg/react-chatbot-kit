@@ -6,11 +6,15 @@ class WidgetRegistry {
     this.actionProvider = actionProvider;
   }
 
-  addWidget = ({ widgetName, widgetFunc, mapStateToProps, props }) => {
+  addWidget = (
+    { widgetName, widgetFunc, mapStateToProps, props },
+    parentProps
+  ) => {
     this[widgetName] = {
       widget: widgetFunc,
       props,
       mapStateToProps,
+      parentProps: { ...parentProps },
     };
   };
 
@@ -21,6 +25,7 @@ class WidgetRegistry {
 
     let props = {
       scrollIntoView: state.scrollIntoView,
+      ...widgetObject.parentProps,
       ...getObject(widgetObject.props),
       ...this.mapStateToProps(widgetObject.mapStateToProps, state),
       setState: this.setState,

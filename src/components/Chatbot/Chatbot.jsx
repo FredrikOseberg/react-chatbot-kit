@@ -24,6 +24,7 @@ const Chatbot = ({
   saveMessages,
   messageHistory,
   validator,
+  ...rest
 }) => {
   if (!config || !actionProvider || !messageParser) {
     return (
@@ -77,13 +78,14 @@ const Chatbot = ({
   const actionProv = new actionProvider(
     createChatBotMessage,
     setState,
-    createClientMessage
+    createClientMessage,
+    rest
   );
   const widgetRegistry = new WidgetRegistry(setState, actionProv);
   const messagePars = new messageParser(actionProv, state);
 
   const widgets = getWidgets(config);
-  widgets.forEach((widget) => widgetRegistry.addWidget(widget));
+  widgets.forEach((widget) => widgetRegistry.addWidget(widget, rest));
 
   return (
     <Chat

@@ -28,6 +28,7 @@
     "@babel/preset-env": "7.9.0",
     "@babel/preset-react": "7.9.4",
     "babel-loader": "8.1.0",
+    "mini-css-extract-plugin": "^1.4.0",
     "prop-types": "15.7.2",
     "react-svg-loader": "^3.0.3",
     "style-loader": "^1.1.3",

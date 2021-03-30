@@ -24,6 +24,8 @@
 
 .react-chatbot-kit-chat-bot-avatar-letter {
   color: #1d1d1d;
+  margin: 0;
+  padding: 0;
 }
 
 .react-chatbot-kit-chat-bot-message {
