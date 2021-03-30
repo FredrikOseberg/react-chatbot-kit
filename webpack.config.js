@@ -1,8 +1,10 @@
 var path = require("path");
 const nodeExternals = require("webpack-node-externals");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/index.js",
+  plugins: [new MiniCssExtractPlugin()],
   target: "node",
   output: {
     path: path.resolve(__dirname, "build"),
@@ -21,12 +23,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-          },
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.svg$/,
