@@ -34,11 +34,18 @@ export const getBotName = (config) => {
   if (config.botName) {
     return config.botName;
   }
-  return "Bot";
+  return 'Bot';
 };
 
 export const getObject = (object) => {
-  if (typeof object === "object") return object;
+  if (typeof object === 'object') return object;
+  return {};
+};
+
+export const getCustomMessages = (config) => {
+  if (config.customMessages) {
+    return config.customMessages;
+  }
   return {};
 };
 
@@ -51,7 +58,7 @@ export const validateProps = (config, MessageParser) => {
   }
 
   const messageParser = new MessageParser();
-  if (!messageParser["parse"]) {
+  if (!messageParser['parse']) {
     errors.push(
       "Messageparser must implement the method 'parse', please add this method to your object. The signature is parse(message: string)."
     );
