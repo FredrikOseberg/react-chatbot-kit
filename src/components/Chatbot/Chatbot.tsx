@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
-import Chat from "../Chat/Chat";
+import Chat from '../Chat/Chat';
 
-import WidgetRegistry from "../WidgetRegistry/WidgetRegistry";
-import ChatbotError from "../ChatbotError/ChatbotError";
+import WidgetRegistry from '../WidgetRegistry/WidgetRegistry';
+import ChatbotError from '../ChatbotError/ChatbotError';
 
-import IConfig from "../../interfaces/IConfig";
-import IWidget from "../../interfaces/IWidget";
+import IConfig from '../../interfaces/IConfig';
+import IWidget from '../../interfaces/IWidget';
 
-import { createChatBotMessage, createClientMessage } from "../Chat/chatUtils";
+import { createChatBotMessage, createClientMessage } from '../Chat/chatUtils';
 import {
   getCustomStyles,
   getInitialState,
   getWidgets,
   getCustomComponents,
   getBotName,
+  getCustomMessages,
   validateProps,
-} from "./utils";
+} from './utils';
 
 interface IChatbotProps {
   actionProvider: any;
@@ -52,7 +53,7 @@ const Chatbot = ({
     const errorMessage = propsErrors.reduce((prev, cur) => {
       prev += cur;
       return prev;
-    }, "");
+    }, '');
 
     return <ChatbotError message={errorMessage} />;
   }
@@ -82,7 +83,7 @@ const Chatbot = ({
     }
 
     return () => {
-      if (saveMessages && typeof saveMessages === "function") {
+      if (saveMessages && typeof saveMessages === 'function') {
         saveMessages(messagesRef.current);
       }
     };
@@ -91,6 +92,7 @@ const Chatbot = ({
   const customStyles = getCustomStyles(config);
   const customComponents = getCustomComponents(config);
   const botName = getBotName(config);
+  const customMessages = getCustomMessages(config);
 
   const actionProv = new actionProvider(
     createChatBotMessage,
@@ -111,6 +113,7 @@ const Chatbot = ({
       widgetRegistry={widgetRegistry}
       actionProvider={actionProv}
       messageParser={messagePars}
+      customMessages={customMessages}
       customComponents={{ ...customComponents }}
       botName={botName}
       customStyles={{ ...customStyles }}

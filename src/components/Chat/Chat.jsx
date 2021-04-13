@@ -1,15 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ConditionallyRender } from "react-util-kit";
+import React, { useState, useRef, useEffect } from 'react';
+import { ConditionallyRender } from 'react-util-kit';
 
-import UserChatMessage from "../UserChatMessage/UserChatMessage";
-import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
-import ChatBotMessageWithWidget from "../ChatbotMessageWithWidget/ChatbotMessageWithWidget";
+import UserChatMessage from '../UserChatMessage/UserChatMessage';
+import ChatbotMessage from '../ChatbotMessage/ChatbotMessage';
 
-import { botMessage, createChatMessage } from "./chatUtils";
+import {
+  botMessage,
+  userMessage,
+  customMessage,
+  createChatMessage,
+} from './chatUtils';
 
-import ChatIcon from "../../assets/icons/paper-plane.svg";
+import ChatIcon from '../../assets/icons/paper-plane.svg';
 
-import "./Chat.css";
+import './Chat.css';
 
 const Chat = ({
   state,
@@ -21,13 +25,14 @@ const Chat = ({
   botName,
   customStyles,
   headerText,
+  customMessages,
   placeholderText,
   validator,
 }) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
 
-  const [input, setInputValue] = useState("");
+  const [input, setInputValue] = useState('');
 
   const scrollIntoView = () => {
     setTimeout(() => {
@@ -47,7 +52,7 @@ const Chat = ({
 
     const lastMessage = messages[index - 1];
 
-    if (lastMessage.type === "bot" && !lastMessage.widget) {
+    if (lastMessage.type === 'bot' && !lastMessage.widget) {
       return false;
     }
     return true;
@@ -55,61 +60,116 @@ const Chat = ({
 
   const renderMessages = () => {
     return messages.map((messageObject, index) => {
-      if (!botMessage(messageObject))
-        return (
-          <UserChatMessage
-            message={messageObject.message}
-            key={messageObject.id}
-            customComponents={customComponents}
-          />
-        );
-
-      let withAvatar;
-      if (messageObject.withAvatar) {
-        withAvatar = messageObject.withAvatar;
-      } else {
-        withAvatar = showAvatar(messages, index, messageObject.withAvatar);
+      if (botMessage(messageObject)) {
+        return renderChatbotMessage(messageObject, index);
       }
 
-      const chatBotMessageProps = {
-        passDownProps: { ...messageObject },
-        setState,
-        state,
-        customComponents,
-        widgetRegistry,
-        messages,
-      };
+      if (userMessage(messageObject)) {
+        return renderUserMessage(messageObject);
+      }
 
-      if (messageObject.widget) {
-        return (
-          <ChatBotMessageWithWidget
-            customStyles={customStyles}
+      if (customMessage(messageObject, customMessages)) {
+        return renderCustomMessage(messageObject);
+      }
+    });
+  };
+
+  const renderCustomMessage = (messageObject) => {
+    const customMessage = customMessages[messageObject.type];
+
+    const props = {
+      setState,
+      state,
+      scrollIntoView,
+      actionProvider,
+    };
+
+    if (messageObject.widget) {
+      return (
+        <>
+          {customMessage(props)}
+          {widgetRegistry.getWidget(messageObject.widget, {
+            ...state,
+            scrollIntoView,
+          })}
+        </>
+      );
+    }
+
+    return customMessage(props);
+  };
+
+  const renderUserMessage = (messageObject) => {
+    return (
+      <>
+        <UserChatMessage
+          message={messageObject.message}
+          key={messageObject.id}
+          customComponents={customComponents}
+        />
+        {widgetRegistry.getWidget(messageObject.widget, {
+          ...state,
+          scrollIntoView,
+        })}
+      </>
+    );
+  };
+
+  const renderChatbotMessage = (messageObject, index) => {
+    let withAvatar;
+    if (messageObject.withAvatar) {
+      withAvatar = messageObject.withAvatar;
+    } else {
+      withAvatar = showAvatar(messages, index, messageObject.withAvatar);
+    }
+
+    const chatbotMessageProps = {
+      ...messageObject,
+      setState,
+      state,
+      customComponents,
+      widgetRegistry,
+      messages,
+    };
+
+    if (messageObject.widget) {
+      return (
+        <>
+          <ChatbotMessage
+            customStyles={customStyles.botMessageBox}
             scrollIntoView={scrollIntoView}
             withAvatar={withAvatar}
-            {...chatBotMessageProps}
+            {...chatbotMessageProps}
             key={messageObject.id}
           />
-        );
-      }
-
-      return (
-        <ChatbotMessage
-          customStyles={customStyles.botMessageBox}
-          key={messageObject.id}
-          withAvatar={withAvatar}
-          {...chatBotMessageProps.passDownProps}
-          customComponents={customComponents}
-          messages={messages}
-          setState={setState}
-        />
+          <ConditionallyRender
+            ifTrue={!chatbotMessageProps.loading}
+            show={widgetRegistry.getWidget(chatbotMessageProps.widget, {
+              ...state,
+              scrollIntoView,
+            })}
+          />
+        </>
       );
-    });
+    }
+
+    return (
+      <ChatbotMessage
+        customStyles={customStyles.botMessageBox}
+        key={messageObject.id}
+        withAvatar={withAvatar}
+        {...chatbotMessageProps}
+        customComponents={customComponents}
+        messages={messages}
+        setState={setState}
+      />
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validator && typeof validator === "function") {
+    if (validator && typeof validator === 'function') {
       if (validator(input)) {
         handleValidMessage();
         messageParser.parse(input);
@@ -123,11 +183,11 @@ const Chat = ({
   const handleValidMessage = () => {
     setState((state) => ({
       ...state,
-      messages: [...state.messages, createChatMessage(input, "user")],
+      messages: [...state.messages, createChatMessage(input, 'user')],
     }));
 
     scrollIntoView();
-    setInputValue("");
+    setInputValue('');
   };
 
   const customButtonStyle = {};
@@ -140,7 +200,7 @@ const Chat = ({
     header = headerText;
   }
 
-  let placeholder = "Write your message here";
+  let placeholder = 'Write your message here';
   if (placeholderText) {
     placeholder = placeholderText;
   }
@@ -163,7 +223,7 @@ const Chat = ({
           ref={chatContainerRef}
         >
           {renderMessages()}
-          <div style={{ paddingBottom: "15px" }} />
+          <div style={{ paddingBottom: '15px' }} />
         </div>
 
         <div className="react-chatbot-kit-chat-input-container">

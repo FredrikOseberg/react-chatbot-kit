@@ -3,7 +3,23 @@ export const uniqueId = () => {
 };
 
 export const botMessage = (message) => {
-  if (message.type === "bot") {
+  if (message.type === 'bot') {
+    return true;
+  }
+  return false;
+};
+
+export const userMessage = (message) => {
+  if (message.type === 'user') {
+    return true;
+  }
+  return false;
+};
+
+export const customMessage = (message, customMessages) => {
+  const customMessage = customMessages[message.type];
+
+  if (customMessage) {
     return true;
   }
   return false;
@@ -19,14 +35,18 @@ export const createChatMessage = (message, type) => {
 
 export const createChatBotMessage = (message, options) => {
   return {
-    ...createChatMessage(message, "bot"),
+    ...createChatMessage(message, 'bot'),
     ...options,
     loading: true,
   };
 };
 
-export const createClientMessage = (message) => {
-  return createChatMessage(message, "user");
+export const createCustomMessage = (message, type, options) => {
+  return { ...createChatMessage(message, type), ...options };
+};
+
+export const createClientMessage = (message, options) => {
+  return { ...createChatMessage(message, 'user'), ...options };
 };
 
 export const callIfExists = (func, ...args) => {
