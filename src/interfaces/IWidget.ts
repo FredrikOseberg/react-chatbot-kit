@@ -1,8 +1,8 @@
-import * as React from "react";
+import { ReactElement } from 'react';
 
 interface IWidget {
   widgetName: string;
-  widgetFunc: (props: any) => React.JSX.Element;
+  widgetFunc: (props: any) => ReactElement;
   props: any;
   mapStateToProps: string[];
 }
