@@ -1,6 +1,7 @@
-import React from "react";
-import IChatbotMessage from "./IChatbotMessage";
-import IWidget from "./IWidget";
+import { ReactElement } from 'react';
+
+import IChatbotMessage from './IChatbotMessage';
+import IWidget from './IWidget';
 
 interface IConfig {
   botName?: string;
@@ -12,11 +13,11 @@ interface IConfig {
 }
 
 interface ICustomComponents {
-  header: (props?: any) => React.JSX.Element;
-  botAvatar: (props?: any) => React.JSX.Element;
-  botChatMessage: (props?: any) => React.JSX.Element;
-  userAvatar: (props?: any) => React.JSX.Element;
-  userChatMessage: (props?: any) => React.JSX.Element;
+  header: (props?: any) => ReactElement;
+  botAvatar: (props?: any) => ReactElement;
+  botChatMessage: (props?: any) => ReactElement;
+  userAvatar: (props?: any) => ReactElement;
+  userChatMessage: (props?: any) => ReactElement;
 }
 
 interface ICustomStyles {
