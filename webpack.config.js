@@ -3,7 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   plugins: [new MiniCssExtractPlugin()],
   target: "node",
   output: {
@@ -14,12 +14,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js|.jsx?$/,
-        include: path.resolve(__dirname, "src"),
+        test: /\.tsx?|.jsx?|.js?$/,
+        use: "ts-loader",
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
       },
       {
         test: /\.css$/,
@@ -32,7 +29,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".jsx", ".js"],
+    extensions: [".tsx", ".jsx", ".js"],
   },
   externals: ["commonjs", "react", nodeExternals()],
 };
