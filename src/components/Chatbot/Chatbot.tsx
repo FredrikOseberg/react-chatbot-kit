@@ -5,6 +5,9 @@ import Chat from "../Chat/Chat";
 import WidgetRegistry from "../WidgetRegistry/WidgetRegistry";
 import ChatbotError from "../ChatbotError/ChatbotError";
 
+import IConfig from "../../interfaces/IConfig";
+import IWidget from "../../interfaces/IWidget";
+
 import { createChatBotMessage, createClientMessage } from "../Chat/chatUtils";
 import {
   getCustomStyles,
@@ -14,6 +17,17 @@ import {
   getBotName,
   validateProps,
 } from "./utils";
+
+interface IChatbotProps {
+  actionProvider: any;
+  messageParser: any;
+  config: IConfig;
+  headerText: string;
+  placeholderText: string;
+  saveMessages: (ref: any) => any;
+  messageHistory: () => any;
+  validator: (input: string) => Boolean;
+}
 
 const Chatbot = ({
   actionProvider,
@@ -25,7 +39,7 @@ const Chatbot = ({
   messageHistory,
   validator,
   ...rest
-}) => {
+}: IChatbotProps) => {
   if (!config || !actionProvider || !messageParser) {
     return (
       <ChatbotError message="I think you forgot to feed me some props. Did you remember to pass a config, a messageparser and an actionprovider?" />
@@ -61,7 +75,10 @@ const Chatbot = ({
 
   useEffect(() => {
     if (messageHistory && Array.isArray(messageHistory)) {
-      setState((prevState) => ({ ...prevState, messages: messageHistory }));
+      setState((prevState: any) => ({
+        ...prevState,
+        messages: messageHistory,
+      }));
     }
 
     return () => {
@@ -85,7 +102,7 @@ const Chatbot = ({
   const messagePars = new messageParser(actionProv, state);
 
   const widgets = getWidgets(config);
-  widgets.forEach((widget) => widgetRegistry.addWidget(widget, rest));
+  widgets.forEach((widget: IWidget) => widgetRegistry.addWidget(widget, rest));
 
   return (
     <Chat
