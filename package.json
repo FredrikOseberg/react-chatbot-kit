@@ -4,6 +4,7 @@
   "homepage": "https://fredrikoseberg.github.io/react-chatbot-kit-docs/",
   "description": "Fully customizable chatbot kit for react.",
   "main": "build/index.js",
+  "types": "./index.d.ts",
   "dependencies": {
     "classnames": "^2.2.6",
     "css-loader": "^3.5.1",
