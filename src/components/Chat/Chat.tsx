@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ConditionallyRender } from 'react-util-kit';
+import React, { useState, useRef, useEffect, SetStateAction } from 'react';
+import ConditionallyRender from 'react-conditionally-render';
 
 import UserChatMessage from '../UserChatMessage/UserChatMessage';
 import ChatbotMessage from '../ChatbotMessage/ChatbotMessage';
@@ -14,6 +14,27 @@ import {
 import ChatIcon from '../../assets/icons/paper-plane.svg';
 
 import './Chat.css';
+import {
+  ICustomComponents,
+  ICustomMessage,
+  ICustomStyles,
+} from '../../interfaces/IConfig';
+import { IMessage } from '../../interfaces/IMessages';
+
+interface IChatProps {
+  setState: React.Dispatch<SetStateAction<any>>;
+  widgetRegistry: any;
+  messageParser: any;
+  actionProvider: any;
+  customComponents: ICustomComponents;
+  botName: string;
+  customStyles: ICustomStyles;
+  headerText: string;
+  customMessages: ICustomMessage;
+  placeholderText: string;
+  validator: (input: string) => Boolean;
+  state: any;
+}
 
 const Chat = ({
   state,
@@ -28,7 +49,7 @@ const Chat = ({
   customMessages,
   placeholderText,
   validator,
-}) => {
+}: IChatProps) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
 
@@ -47,7 +68,7 @@ const Chat = ({
     scrollIntoView();
   });
 
-  const showAvatar = (messages, index) => {
+  const showAvatar = (messages: any[], index: number) => {
     if (index === 0) return true;
 
     const lastMessage = messages[index - 1];
@@ -59,7 +80,7 @@ const Chat = ({
   };
 
   const renderMessages = () => {
-    return messages.map((messageObject, index) => {
+    return messages.map((messageObject: IMessage, index: number) => {
       if (botMessage(messageObject)) {
         return renderChatbotMessage(messageObject, index);
       }
@@ -74,7 +95,7 @@ const Chat = ({
     });
   };
 
-  const renderCustomMessage = (messageObject) => {
+  const renderCustomMessage = (messageObject: IMessage) => {
     const customMessage = customMessages[messageObject.type];
 
     const props = {
@@ -99,7 +120,7 @@ const Chat = ({
     return customMessage(props);
   };
 
-  const renderUserMessage = (messageObject) => {
+  const renderUserMessage = (messageObject: IMessage) => {
     return (
       <>
         <UserChatMessage
@@ -115,12 +136,12 @@ const Chat = ({
     );
   };
 
-  const renderChatbotMessage = (messageObject, index) => {
+  const renderChatbotMessage = (messageObject: IMessage, index: number) => {
     let withAvatar;
     if (messageObject.withAvatar) {
       withAvatar = messageObject.withAvatar;
     } else {
-      withAvatar = showAvatar(messages, index, messageObject.withAvatar);
+      withAvatar = showAvatar(messages, index);
     }
 
     const chatbotMessageProps = {
@@ -137,13 +158,12 @@ const Chat = ({
         <>
           <ChatbotMessage
             customStyles={customStyles.botMessageBox}
-            scrollIntoView={scrollIntoView}
             withAvatar={withAvatar}
             {...chatbotMessageProps}
             key={messageObject.id}
           />
           <ConditionallyRender
-            ifTrue={!chatbotMessageProps.loading}
+            condition={!chatbotMessageProps.loading}
             show={widgetRegistry.getWidget(chatbotMessageProps.widget, {
               ...state,
               scrollIntoView,
@@ -166,7 +186,7 @@ const Chat = ({
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validator && typeof validator === 'function') {
@@ -181,7 +201,7 @@ const Chat = ({
   };
 
   const handleValidMessage = () => {
-    setState((state) => ({
+    setState((state: any) => ({
       ...state,
       messages: [...state.messages, createChatMessage(input, 'user')],
     }));
@@ -190,7 +210,7 @@ const Chat = ({
     setInputValue('');
   };
 
-  const customButtonStyle = {};
+  const customButtonStyle = { backgroundColor: '' };
   if (customStyles && customStyles.chatButton) {
     customButtonStyle.backgroundColor = customStyles.chatButton.backgroundColor;
   }
@@ -209,7 +229,7 @@ const Chat = ({
     <div className="react-chatbot-kit-chat-container">
       <div className="react-chatbot-kit-chat-inner-container">
         <ConditionallyRender
-          ifTrue={customComponents.header}
+          condition={!!customComponents.header}
           show={
             customComponents.header && customComponents.header(actionProvider)
           }

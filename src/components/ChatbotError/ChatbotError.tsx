@@ -1,10 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import ChatbotMessage from "../ChatbotMessage/ChatbotMessage";
+import ChatbotMessage from '../ChatbotMessage/ChatbotMessage';
 
-import "./ChatbotError.css";
+import './ChatbotError.css';
 
-const ChatbotError = ({ message }) => {
+interface IChatbotErrorProps {
+  message: string;
+}
+
+const ChatbotError = ({ message }: IChatbotErrorProps) => {
   return (
     <div className="react-chatbot-kit-error">
       <h1 className="react-chatbot-kit-error-header">
@@ -16,7 +20,7 @@ const ChatbotError = ({ message }) => {
           withAvatar
           loading={false}
           id={1}
-          customComponents={{}}
+          customStyles={{ backgroundColor: '' }}
           messages={[]}
         />
       </div>
