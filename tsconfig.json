@@ -11,6 +11,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "dist"
+    "declarationDir": "build"
   }
 }
