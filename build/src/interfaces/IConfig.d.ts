@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
-import IChatbotMessage from './IChatbotMessage';
+import { IMessage } from './IMessages';
 import IWidget from './IWidget';
 interface IConfig {
     botName?: string;
-    initialMessages: IChatbotMessage[];
+    initialMessages: IMessage[];
     state?: any;
     customComponents?: ICustomComponents;
     customStyles?: ICustomStyles;
