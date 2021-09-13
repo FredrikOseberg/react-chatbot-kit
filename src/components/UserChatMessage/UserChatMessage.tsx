@@ -1,17 +1,26 @@
-import React from "react";
-import { ConditionallyRender } from "react-util-kit";
+import React from 'react';
+import ConditionallyRender from 'react-conditionally-render';
 
-import { callIfExists } from "../Chat/chatUtils";
+import { callIfExists } from '../Chat/chatUtils';
 
-import UserIcon from "../../assets/icons/user-alt.svg";
+import UserIcon from '../../assets/icons/user-alt.svg';
 
-import "./UserChatMessage.css";
+import './UserChatMessage.css';
+import { ICustomComponents } from '../../interfaces/IConfig';
 
-const UserChatMessage = ({ message, customComponents }) => {
+interface IUserChatMessageProps {
+  message: string;
+  customComponents: ICustomComponents;
+}
+
+const UserChatMessage = ({
+  message,
+  customComponents,
+}: IUserChatMessageProps) => {
   return (
     <div className="react-chatbot-kit-user-chat-message-container">
       <ConditionallyRender
-        ifTrue={customComponents.userChatMessage}
+        condition={!!customComponents.userChatMessage}
         show={callIfExists(customComponents.userChatMessage, {
           message,
         })}
@@ -23,7 +32,7 @@ const UserChatMessage = ({ message, customComponents }) => {
         }
       />
       <ConditionallyRender
-        ifTrue={customComponents.userAvatar}
+        condition={!!customComponents.userAvatar}
         show={callIfExists(customComponents.userAvatar)}
         elseShow={
           <div className="react-chatbot-kit-user-avatar">

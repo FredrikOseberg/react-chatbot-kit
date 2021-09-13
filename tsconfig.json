@@ -6,7 +6,11 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
+    "lib": ["es6", "es2015", "dom"],
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "dist"
   }
 }
