@@ -91,8 +91,8 @@ const useChatbot = ({
     createChatBotMessage,
     setState,
     createClientMessage,
-    createCustomMessage,
     stateRef.current,
+    createCustomMessage,
     rest
   );
 
