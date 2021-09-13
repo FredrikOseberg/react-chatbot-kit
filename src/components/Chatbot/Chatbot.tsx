@@ -19,11 +19,11 @@ interface IChatbotProps {
   actionProvider: any;
   messageParser: any;
   config: IConfig;
-  headerText: string;
-  placeholderText: string;
-  saveMessages: (ref: any) => any;
-  messageHistory: () => any;
-  validator: (input: string) => Boolean;
+  headerText?: string;
+  placeholderText?: string;
+  saveMessages?: (ref: any) => any;
+  messageHistory?: () => any;
+  validator?: (input: string) => Boolean;
 }
 
 const Chatbot = ({

@@ -1,3 +1,4 @@
+import React from 'react';
 import WidgetRegistry from '../components/WidgetRegistry/WidgetRegistry';
 import IConfig from '../interfaces/IConfig';
 interface IUseChatbotParams {
@@ -30,6 +31,6 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     configurationError: string;
     invalidPropsError: string;
     state: any;
-    setState: import("react").Dispatch<any>;
+    setState: React.Dispatch<any>;
 };
 export default useChatbot;

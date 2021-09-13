@@ -8,8 +8,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "css-loader": "^3.5.1",
-    "react-conditionally-render": "^1.0.2",
-    "react-util-kit": "0.0.14"
+    "react-conditionally-render": "^1.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,10 +25,10 @@
     "@babel/core": "7.9.0",
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "7.9.0",
-    "@babel/plugin-transform-react-jsx": "7.9.4",
-    "@babel/preset-env": "7.9.0",
-    "@babel/preset-react": "7.9.4",
-    "@types/react": "^17.0.3",
+    "@babel/plugin-transform-react-jsx": "7.14.9",
+    "@babel/preset-env": "7.15.6",
+    "@babel/preset-react": "7.14.5",
+    "@types/react": "^17.0.20",
     "babel-loader": "8.1.0",
     "mini-css-extract-plugin": "^1.4.0",
     "prop-types": "15.7.2",

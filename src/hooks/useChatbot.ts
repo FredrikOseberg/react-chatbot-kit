@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   createClientMessage,
   createChatBotMessage,
@@ -57,12 +57,12 @@ const useChatbot = ({
     config.initialMessages = [...messageHistory];
   }
 
-  const [state, setState] = useState({
+  const [state, setState] = React.useState({
     messages: [...config.initialMessages],
     ...initialState,
   });
-  const messagesRef = useRef(state.messages);
-  const stateRef = useRef();
+  const messagesRef = React.useRef(state.messages);
+  const stateRef = React.useRef();
 
   useEffect(() => {
     messagesRef.current = state.messages;
