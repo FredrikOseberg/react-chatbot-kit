@@ -25,6 +25,7 @@ interface IChatbotProps {
   saveMessages?: (ref: any) => any;
   messageHistory?: IMessage[] | string;
   validator?: (input: string) => Boolean;
+  runInitialMessagesWithHistory?: Boolean;
 }
 
 const Chatbot = ({
@@ -35,6 +36,7 @@ const Chatbot = ({
   placeholderText,
   saveMessages,
   messageHistory,
+  runInitialMessagesWithHistory,
   validator,
   ...rest
 }: IChatbotProps) => {
@@ -53,6 +55,7 @@ const Chatbot = ({
     messageParser,
     messageHistory,
     saveMessages,
+    runInitialMessagesWithHistory,
     ...rest,
   });
 
