@@ -249,8 +249,6 @@ const Chat = ({
     placeholder = placeholderText;
   }
 
-  console.log(messageHistory);
-
   return (
     <div className="react-chatbot-kit-chat-container">
       <div className="react-chatbot-kit-chat-inner-container">

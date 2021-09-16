@@ -9,6 +9,7 @@ interface IChatbotProps {
     saveMessages?: (ref: any) => any;
     messageHistory?: IMessage[] | string;
     validator?: (input: string) => Boolean;
+    runInitialMessagesWithHistory?: Boolean;
 }
-declare const Chatbot: ({ actionProvider, messageParser, config, headerText, placeholderText, saveMessages, messageHistory, validator, ...rest }: IChatbotProps) => JSX.Element;
+declare const Chatbot: ({ actionProvider, messageParser, config, headerText, placeholderText, saveMessages, messageHistory, runInitialMessagesWithHistory, validator, ...rest }: IChatbotProps) => JSX.Element;
 export default Chatbot;

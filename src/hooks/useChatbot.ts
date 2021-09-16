@@ -21,6 +21,7 @@ interface IUseChatbotParams {
   messageParser: any;
   messageHistory: IMessage[] | string;
   saveMessages: (messages: IMessage[], html: string) => any | null;
+  runInitialMessagesWithHistory?: Boolean;
 }
 
 const useChatbot = ({
@@ -28,6 +29,7 @@ const useChatbot = ({
   actionProvider,
   messageParser,
   messageHistory,
+  runInitialMessagesWithHistory,
   saveMessages,
   ...rest
 }: IUseChatbotParams) => {
@@ -58,7 +60,9 @@ const useChatbot = ({
   if (messageHistory && Array.isArray(messageHistory)) {
     config.initialMessages = [...messageHistory];
   } else if (typeof messageHistory === 'string' && Boolean(messageHistory)) {
-    config.initialMessages = [];
+    if (!runInitialMessagesWithHistory) {
+      config.initialMessages = [];
+    }
   }
 
   const [state, setState] = React.useState({
@@ -85,7 +89,6 @@ const useChatbot = ({
     return () => {
       if (saveMessages && typeof saveMessages === 'function') {
         const HTML = messageContainerRef?.current?.innerHTML.toString();
-        console.log('RUNNING', HTML);
 
         if (!messageContainerRef.current) return;
         saveMessages(messagesRef.current, HTML);
