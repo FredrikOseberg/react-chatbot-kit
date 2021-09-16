@@ -31,5 +31,5 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
   },
-  externals: ['commonjs', 'react', nodeExternals()],
+  externals: ['react', nodeExternals()],
 };
