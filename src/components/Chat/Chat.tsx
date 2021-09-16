@@ -106,13 +106,14 @@ const Chat = ({
     };
 
     if (messageObject.widget) {
+      const widget = widgetRegistry.getWidget(messageObject.widget, {
+        ...state,
+        scrollIntoView,
+      });
       return (
         <>
           {customMessage(props)}
-          {widgetRegistry.getWidget(messageObject.widget, {
-            ...state,
-            scrollIntoView,
-          })}
+          {widget ? widget : null}
         </>
       );
     }
@@ -121,6 +122,10 @@ const Chat = ({
   };
 
   const renderUserMessage = (messageObject: IMessage) => {
+    const widget = widgetRegistry.getWidget(messageObject.widget, {
+      ...state,
+      scrollIntoView,
+    });
     return (
       <>
         <UserChatMessage
@@ -128,10 +133,7 @@ const Chat = ({
           key={messageObject.id}
           customComponents={customComponents}
         />
-        {widgetRegistry.getWidget(messageObject.widget, {
-          ...state,
-          scrollIntoView,
-        })}
+        {widget ? widget : null}
       </>
     );
   };
@@ -154,6 +156,10 @@ const Chat = ({
     };
 
     if (messageObject.widget) {
+      const widget = widgetRegistry.getWidget(chatbotMessageProps.widget, {
+        ...state,
+        scrollIntoView,
+      });
       return (
         <>
           <ChatbotMessage
@@ -164,10 +170,7 @@ const Chat = ({
           />
           <ConditionallyRender
             condition={!chatbotMessageProps.loading}
-            show={widgetRegistry.getWidget(chatbotMessageProps.widget, {
-              ...state,
-              scrollIntoView,
-            })}
+            show={widget ? widget : null}
           />
         </>
       );
