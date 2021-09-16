@@ -12,14 +12,15 @@ import {
 } from '../components/Chatbot/utils';
 import WidgetRegistry from '../components/WidgetRegistry/WidgetRegistry';
 import IConfig from '../interfaces/IConfig';
+import { IMessage } from '../interfaces/IMessages';
 import IWidget from '../interfaces/IWidget';
 
 interface IUseChatbotParams {
   config: IConfig | null;
   actionProvider: any;
   messageParser: any;
-  messageHistory: any[] | (() => {});
-  saveMessages: (args: any) => any | null;
+  messageHistory: IMessage[] | string;
+  saveMessages: (messages: IMessage[], html: string) => any | null;
 }
 
 const useChatbot = ({
@@ -50,11 +51,14 @@ const useChatbot = ({
 
     return { invalidPropsError };
   }
+  const [messageContainerRef, setMessageContainerRef] = useState<any>({});
 
   const initialState = getInitialState(config);
 
   if (messageHistory && Array.isArray(messageHistory)) {
     config.initialMessages = [...messageHistory];
+  } else if (typeof messageHistory === 'string' && Boolean(messageHistory)) {
+    config.initialMessages = [];
   }
 
   const [state, setState] = React.useState({
@@ -75,13 +79,19 @@ const useChatbot = ({
         messages: messageHistory,
       }));
     }
+  }, []);
 
+  useEffect(() => {
     return () => {
       if (saveMessages && typeof saveMessages === 'function') {
-        saveMessages(messagesRef.current);
+        const HTML = messageContainerRef?.current?.innerHTML.toString();
+        console.log('RUNNING', HTML);
+
+        if (!messageContainerRef.current) return;
+        saveMessages(messagesRef.current, HTML);
       }
     };
-  }, []);
+  }, [messageContainerRef.current]);
 
   useEffect(() => {
     stateRef.current = state;
@@ -110,6 +120,7 @@ const useChatbot = ({
     invalidPropsError,
     state,
     setState,
+    setMessageContainerRef,
   };
 };
 
