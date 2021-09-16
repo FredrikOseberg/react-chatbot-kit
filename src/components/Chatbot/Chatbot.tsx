@@ -26,6 +26,7 @@ interface IChatbotProps {
   messageHistory?: IMessage[] | string;
   validator?: (input: string) => Boolean;
   runInitialMessagesWithHistory?: Boolean;
+  disableScrollToBottom?: boolean;
 }
 
 const Chatbot = ({
@@ -37,6 +38,7 @@ const Chatbot = ({
   saveMessages,
   messageHistory,
   runInitialMessagesWithHistory,
+  disableScrollToBottom,
   validator,
   ...rest
 }: IChatbotProps) => {
@@ -88,6 +90,7 @@ const Chatbot = ({
       setMessageContainerRef={setMessageContainerRef}
       validator={validator}
       messageHistory={messageHistory}
+      disableScrollToBottom={disableScrollToBottom}
     />
   );
 };

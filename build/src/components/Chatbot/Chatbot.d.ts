@@ -10,6 +10,7 @@ interface IChatbotProps {
     messageHistory?: IMessage[] | string;
     validator?: (input: string) => Boolean;
     runInitialMessagesWithHistory?: Boolean;
+    disableScrollToBottom?: boolean;
 }
-declare const Chatbot: ({ actionProvider, messageParser, config, headerText, placeholderText, saveMessages, messageHistory, runInitialMessagesWithHistory, validator, ...rest }: IChatbotProps) => JSX.Element;
+declare const Chatbot: ({ actionProvider, messageParser, config, headerText, placeholderText, saveMessages, messageHistory, runInitialMessagesWithHistory, disableScrollToBottom, validator, ...rest }: IChatbotProps) => JSX.Element;
 export default Chatbot;
