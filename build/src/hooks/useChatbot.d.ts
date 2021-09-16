@@ -1,12 +1,13 @@
 import React from 'react';
 import WidgetRegistry from '../components/WidgetRegistry/WidgetRegistry';
 import IConfig from '../interfaces/IConfig';
+import { IMessage } from '../interfaces/IMessages';
 interface IUseChatbotParams {
     config: IConfig | null;
     actionProvider: any;
     messageParser: any;
-    messageHistory: any[] | (() => {});
-    saveMessages: (args: any) => any | null;
+    messageHistory: IMessage[] | string;
+    saveMessages: (messages: IMessage[], html: string) => any | null;
 }
 declare const useChatbot: ({ config, actionProvider, messageParser, messageHistory, saveMessages, ...rest }: IUseChatbotParams) => {
     configurationError: string;
@@ -16,6 +17,7 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     messagePars?: undefined;
     state?: undefined;
     setState?: undefined;
+    setMessageContainerRef?: undefined;
 } | {
     invalidPropsError: string;
     configurationError?: undefined;
@@ -24,6 +26,7 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     messagePars?: undefined;
     state?: undefined;
     setState?: undefined;
+    setMessageContainerRef?: undefined;
 } | {
     widgetRegistry: WidgetRegistry;
     actionProv: any;
@@ -32,5 +35,6 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     invalidPropsError: string;
     state: any;
     setState: React.Dispatch<any>;
+    setMessageContainerRef: React.Dispatch<any>;
 };
 export default useChatbot;

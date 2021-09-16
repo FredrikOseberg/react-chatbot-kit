@@ -14,6 +14,7 @@ import {
 } from './utils';
 
 import useChatbot from '../../hooks/useChatbot';
+import { IMessage } from '../../interfaces/IMessages';
 
 interface IChatbotProps {
   actionProvider: any;
@@ -22,7 +23,7 @@ interface IChatbotProps {
   headerText?: string;
   placeholderText?: string;
   saveMessages?: (ref: any) => any;
-  messageHistory?: () => any;
+  messageHistory?: IMessage[] | string;
   validator?: (input: string) => Boolean;
 }
 
@@ -45,6 +46,7 @@ const Chatbot = ({
     widgetRegistry,
     state,
     setState,
+    setMessageContainerRef,
   } = useChatbot({
     config,
     actionProvider,
@@ -80,7 +82,9 @@ const Chatbot = ({
       customStyles={{ ...customStyles }}
       headerText={headerText}
       placeholderText={placeholderText}
+      setMessageContainerRef={setMessageContainerRef}
       validator={validator}
+      messageHistory={messageHistory}
     />
   );
 };
