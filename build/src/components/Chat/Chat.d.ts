@@ -16,7 +16,8 @@ interface IChatProps {
     validator: (input: string) => Boolean;
     state: any;
     setMessageContainerRef: React.Dispatch<SetStateAction<any>>;
+    disableScrollToBottom: boolean;
     messageHistory: IMessage[] | string;
 }
-declare const Chat: ({ state, setState, widgetRegistry, messageParser, customComponents, actionProvider, botName, customStyles, headerText, customMessages, placeholderText, validator, setMessageContainerRef, messageHistory, }: IChatProps) => JSX.Element;
+declare const Chat: ({ state, setState, widgetRegistry, messageParser, customComponents, actionProvider, botName, customStyles, headerText, customMessages, placeholderText, validator, setMessageContainerRef, disableScrollToBottom, messageHistory, }: IChatProps) => JSX.Element;
 export default Chat;

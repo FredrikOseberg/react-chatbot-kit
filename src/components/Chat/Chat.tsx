@@ -36,6 +36,7 @@ interface IChatProps {
   validator: (input: string) => Boolean;
   state: any;
   setMessageContainerRef: React.Dispatch<SetStateAction<any>>;
+  disableScrollToBottom: boolean;
   messageHistory: IMessage[] | string;
 }
 
@@ -53,6 +54,7 @@ const Chat = ({
   placeholderText,
   validator,
   setMessageContainerRef,
+  disableScrollToBottom,
   messageHistory,
 }: IChatProps) => {
   const { messages } = state;
@@ -70,6 +72,7 @@ const Chat = ({
   };
 
   useEffect(() => {
+    if (disableScrollToBottom) return;
     scrollIntoView();
   });
 
