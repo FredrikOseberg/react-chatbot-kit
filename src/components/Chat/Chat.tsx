@@ -82,15 +82,27 @@ const Chat = ({
   const renderMessages = () => {
     return messages.map((messageObject: IMessage, index: number) => {
       if (botMessage(messageObject)) {
-        return renderChatbotMessage(messageObject, index);
+        return (
+          <React.Fragment key={messageObject.id}>
+            {renderChatbotMessage(messageObject, index)}
+          </React.Fragment>
+        );
       }
 
       if (userMessage(messageObject)) {
-        return renderUserMessage(messageObject);
+        return (
+          <React.Fragment key={messageObject.id}>
+            {renderUserMessage(messageObject)}
+          </React.Fragment>
+        );
       }
 
       if (customMessage(messageObject, customMessages)) {
-        return renderCustomMessage(messageObject);
+        return (
+          <React.Fragment key={messageObject.id}>
+            {renderCustomMessage(messageObject)}
+          </React.Fragment>
+        );
       }
     });
   };
