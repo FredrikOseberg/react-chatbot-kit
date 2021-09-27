@@ -1,38 +1,35 @@
-var path = require("path");
-const nodeExternals = require("webpack-node-externals");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.ts',
   plugins: [new MiniCssExtractPlugin()],
-  target: "node",
+  target: 'node',
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "index.js",
-    libraryTarget: "commonjs2",
+    path: path.resolve(__dirname, 'build'),
+    filename: 'index.js',
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
       {
-        test: /\.js|.jsx?$/,
-        include: path.resolve(__dirname, "src"),
+        test: /\.tsx?|.jsx?|.js?|.ts?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.svg$/,
-        loader: "react-svg-loader",
+        loader: 'react-svg-loader',
       },
     ],
   },
   resolve: {
-    extensions: [".jsx", ".js"],
+    extensions: ['.tsx', '.jsx', '.js', '.ts'],
   },
-  externals: ["commonjs", "react", nodeExternals()],
+  externals: ['react', nodeExternals()],
 };

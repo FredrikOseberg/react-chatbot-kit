@@ -1,4 +1,4 @@
-import { getObject } from "../Chatbot/utils";
+import { getObject } from '../Chatbot/utils';
 
 class WidgetRegistry {
   constructor(setStateFunc, actionProvider) {
@@ -32,7 +32,13 @@ class WidgetRegistry {
       actionProvider: this.actionProvider,
     };
 
-    return widgetObject.widget(props);
+    const widget = widgetObject.widget(props);
+
+    if (widget) {
+      return widget;
+    }
+
+    return null;
   };
 
   mapStateToProps = (props, state) => {
