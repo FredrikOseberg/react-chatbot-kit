@@ -88,16 +88,16 @@ const ChatbotMessage = ({
             condition={withAvatar}
             show={
               <ConditionallyRender
-                condition={!!customComponents.botAvatar}
-                show={callIfExists(customComponents.botAvatar)}
+                condition={!!customComponents?.botAvatar}
+                show={callIfExists(customComponents?.botAvatar)}
                 elseShow={<ChatbotMessageAvatar />}
               />
             }
           />
 
           <ConditionallyRender
-            condition={!!customComponents.botChatMessage}
-            show={callIfExists(customComponents.botChatMessage, {
+            condition={!!customComponents?.botChatMessage}
+            show={callIfExists(customComponents?.botChatMessage, {
               message,
               loader: <Loader />,
             })}

@@ -11,7 +11,7 @@ export interface IMessageOptions {
 }
 
 export interface IMessage extends IBaseMessage {
-  options: IMessageOptions;
+  options?: IMessageOptions;
   loading?: boolean;
   widget?: string;
   delay?: number;
