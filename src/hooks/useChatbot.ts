@@ -129,7 +129,7 @@ const useChatbot = ({
   } else {
     console.log('REACT COMPONENT');
     actionProv = actionProvider;
-    messagePars = messagePars;
+    messagePars = messageParser;
     widgetRegistry = new WidgetRegistry(setState, null);
 
     widgets = getWidgets(config);

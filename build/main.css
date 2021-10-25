@@ -143,7 +143,6 @@
   height: 500px;
   background-color: #fff;
   border-radius: 3px;
-  margin-bottom: 15px;
   border-radius: 5px;
 }
 
@@ -202,6 +201,7 @@
 .react-chatbot-kit-chat-btn-send-icon {
   fill: #fff;
   width: 15px;
+  margin: 0 auto;
 }
 
 .react-chatbot-kit-error {
