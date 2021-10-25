@@ -127,12 +127,14 @@ const Chat = ({
       state,
       scrollIntoView,
       actionProvider,
+      payload: messageObject.payload,
     };
 
     if (messageObject.widget) {
       const widget = widgetRegistry.getWidget(messageObject.widget, {
         ...state,
         scrollIntoView,
+        payload: messageObject.payload,
       });
       return (
         <>
@@ -149,6 +151,7 @@ const Chat = ({
     const widget = widgetRegistry.getWidget(messageObject.widget, {
       ...state,
       scrollIntoView,
+      payload: messageObject.payload,
     });
     return (
       <>
@@ -183,6 +186,7 @@ const Chat = ({
       const widget = widgetRegistry.getWidget(chatbotMessageProps.widget, {
         ...state,
         scrollIntoView,
+        payload: messageObject.payload,
       });
       return (
         <>

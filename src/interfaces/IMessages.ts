@@ -8,6 +8,7 @@ export interface IMessageOptions {
   loading?: boolean;
   widget?: string;
   delay?: number;
+  payload?: any;
 }
 
 export interface IMessage extends IBaseMessage {
@@ -16,4 +17,5 @@ export interface IMessage extends IBaseMessage {
   widget?: string;
   delay?: number;
   withAvatar?: boolean;
+  payload?: any;
 }
