@@ -30,7 +30,7 @@ class WidgetRegistry {
       ...this.mapStateToProps(widgetObject.mapStateToProps, options),
       setState: this.setState,
       actionProvider: this.actionProvider,
-      options,
+      state: options,
       payload: options.payload,
     };
 

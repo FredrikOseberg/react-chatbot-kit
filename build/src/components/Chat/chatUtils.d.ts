@@ -12,6 +12,7 @@ export declare const createChatBotMessage: (message: string, options: IMessageOp
     loading: boolean;
     widget?: string;
     delay?: number;
+    payload?: any;
     message: string;
     type: string;
     id: number;
@@ -20,6 +21,7 @@ export declare const createCustomMessage: (message: string, type: string, option
     loading?: boolean;
     widget?: string;
     delay?: number;
+    payload?: any;
     message: string;
     type: string;
     id: number;
@@ -28,6 +30,7 @@ export declare const createClientMessage: (message: string, options: IMessageOpt
     loading?: boolean;
     widget?: string;
     delay?: number;
+    payload?: any;
     message: string;
     type: string;
     id: number;

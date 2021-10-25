@@ -100,20 +100,43 @@ const useChatbot = ({
     stateRef.current = state;
   }, [state]);
 
-  const actionProv = new actionProvider(
-    createChatBotMessage,
-    setState,
-    createClientMessage,
-    stateRef.current,
-    createCustomMessage,
-    rest
-  );
+  let actionProv;
+  let widgetRegistry: WidgetRegistry;
+  let messagePars;
+  let widgets;
 
-  const widgetRegistry = new WidgetRegistry(setState, actionProv);
-  const messagePars = new messageParser(actionProv, stateRef.current);
+  if (
+    !(typeof actionProvider === 'function') &&
+    !(typeof messageParser === 'function')
+  ) {
+    console.log('NOT REACT COMPONENT');
+    actionProv = new actionProvider(
+      createChatBotMessage,
+      setState,
+      createClientMessage,
+      stateRef.current,
+      createCustomMessage,
+      rest
+    );
 
-  const widgets = getWidgets(config);
-  widgets.forEach((widget: IWidget) => widgetRegistry.addWidget(widget, rest));
+    widgetRegistry = new WidgetRegistry(setState, actionProv);
+    messagePars = new messageParser(actionProv, stateRef.current);
+
+    widgets = getWidgets(config);
+    widgets.forEach((widget: IWidget) =>
+      widgetRegistry?.addWidget(widget, rest)
+    );
+  } else {
+    console.log('REACT COMPONENT');
+    actionProv = actionProvider;
+    messagePars = messagePars;
+    widgetRegistry = new WidgetRegistry(setState, null);
+
+    widgets = getWidgets(config);
+    widgets.forEach((widget: IWidget) =>
+      widgetRegistry?.addWidget(widget, rest)
+    );
+  }
 
   return {
     widgetRegistry,

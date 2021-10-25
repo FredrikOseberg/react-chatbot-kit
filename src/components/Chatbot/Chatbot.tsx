@@ -15,6 +15,7 @@ import {
 
 import useChatbot from '../../hooks/useChatbot';
 import { IMessage } from '../../interfaces/IMessages';
+import { createChatBotMessage } from '../..';
 
 interface IChatbotProps {
   actionProvider: any;
@@ -74,25 +75,61 @@ const Chatbot = ({
   const botName = getBotName(config);
   const customMessages = getCustomMessages(config);
 
-  return (
-    <Chat
-      state={state}
-      setState={setState}
-      widgetRegistry={widgetRegistry}
-      actionProvider={actionProv}
-      messageParser={messagePars}
-      customMessages={customMessages}
-      customComponents={{ ...customComponents }}
-      botName={botName}
-      customStyles={{ ...customStyles }}
-      headerText={headerText}
-      placeholderText={placeholderText}
-      setMessageContainerRef={setMessageContainerRef}
-      validator={validator}
-      messageHistory={messageHistory}
-      disableScrollToBottom={disableScrollToBottom}
-    />
-  );
+  if (
+    !(typeof actionProv === 'function') &&
+    !(typeof messagePars === 'function')
+  ) {
+    return (
+      <Chat
+        state={state}
+        setState={setState}
+        widgetRegistry={widgetRegistry}
+        actionProvider={actionProv}
+        messageParser={messagePars}
+        customMessages={customMessages}
+        customComponents={{ ...customComponents }}
+        botName={botName}
+        customStyles={{ ...customStyles }}
+        headerText={headerText}
+        placeholderText={placeholderText}
+        setMessageContainerRef={setMessageContainerRef}
+        validator={validator}
+        messageHistory={messageHistory}
+        disableScrollToBottom={disableScrollToBottom}
+      />
+    );
+  } else {
+    return (
+      /* @ts-ignore */
+      <actionProv
+        setState={setState}
+        createChatBotMessage={createChatBotMessage}
+      >
+        {/* @ts-ignore */}
+        <messagePars>
+          <Chat
+            state={state}
+            setState={setState}
+            widgetRegistry={widgetRegistry}
+            actionProvider={actionProv}
+            messageParser={messagePars}
+            customMessages={customMessages}
+            customComponents={{ ...customComponents }}
+            botName={botName}
+            customStyles={{ ...customStyles }}
+            headerText={headerText}
+            placeholderText={placeholderText}
+            setMessageContainerRef={setMessageContainerRef}
+            validator={validator}
+            messageHistory={messageHistory}
+            disableScrollToBottom={disableScrollToBottom}
+          />
+          {/* @ts-ignore */}
+        </messagePars>
+        {/* @ts-ignore */}
+      </actionProv>
+    );
+  }
 };
 
 export default Chatbot;

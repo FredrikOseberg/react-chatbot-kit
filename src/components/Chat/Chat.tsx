@@ -38,6 +38,7 @@ interface IChatProps {
   setMessageContainerRef: React.Dispatch<SetStateAction<any>>;
   disableScrollToBottom: boolean;
   messageHistory: IMessage[] | string;
+  parse?: (message: string) => void;
 }
 
 const Chat = ({
@@ -45,6 +46,7 @@ const Chat = ({
   setState,
   widgetRegistry,
   messageParser,
+  parse,
   customComponents,
   actionProvider,
   botName,
@@ -59,6 +61,8 @@ const Chat = ({
 }: IChatProps) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
+
+  console.log(parse);
 
   const [input, setInputValue] = useState('');
 
@@ -223,10 +227,16 @@ const Chat = ({
     if (validator && typeof validator === 'function') {
       if (validator(input)) {
         handleValidMessage();
+        if (parse) {
+          return parse(input);
+        }
         messageParser.parse(input);
       }
     } else {
       handleValidMessage();
+      if (parse) {
+        return parse(input);
+      }
       messageParser.parse(input);
     }
   };
