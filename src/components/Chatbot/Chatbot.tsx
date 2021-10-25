@@ -99,14 +99,16 @@ const Chatbot = ({
       />
     );
   } else {
+    const ActionComponent = actionProv;
+    const MessageComponent = messagePars;
     return (
       /* @ts-ignore */
-      <actionProv
+      <ActionComponent
         setState={setState}
         createChatBotMessage={createChatBotMessage}
       >
         {/* @ts-ignore */}
-        <messagePars>
+        <MessageComponent>
           <Chat
             state={state}
             setState={setState}
@@ -125,9 +127,9 @@ const Chatbot = ({
             disableScrollToBottom={disableScrollToBottom}
           />
           {/* @ts-ignore */}
-        </messagePars>
+        </MessageComponent>
         {/* @ts-ignore */}
-      </actionProv>
+      </ActionComponent>
     );
   }
 };
