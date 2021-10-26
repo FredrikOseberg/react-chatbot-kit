@@ -8,6 +8,7 @@ import {
   getCustomStyles,
   getInitialState,
   getWidgets,
+  isConstructor,
   validateProps,
 } from '../components/Chatbot/utils';
 import WidgetRegistry from '../components/WidgetRegistry/WidgetRegistry';
@@ -108,10 +109,7 @@ const useChatbot = ({
   const ActionProvider = actionProvider;
   const MessageParser = messageParser;
 
-  if (
-    !React.isValidElement(ActionProvider({})) &&
-    !React.isValidElement(MessageParser({}))
-  ) {
+  if (isConstructor(ActionProvider) && isConstructor(MessageParser)) {
     actionProv = new actionProvider(
       createChatBotMessage,
       setState,

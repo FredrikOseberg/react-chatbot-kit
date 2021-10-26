@@ -65,3 +65,12 @@ export const validateProps = (config: IConfig, MessageParser: any) => {
 
   return errors;
 };
+
+export const isConstructor = (func: any) => {
+  try {
+    new func();
+  } catch (err) {
+    return false;
+  }
+  return true;
+};

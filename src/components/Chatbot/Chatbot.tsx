@@ -11,6 +11,7 @@ import {
   getCustomComponents,
   getBotName,
   getCustomMessages,
+  isConstructor,
 } from './utils';
 
 import useChatbot from '../../hooks/useChatbot';
@@ -75,10 +76,7 @@ const Chatbot = ({
   const botName = getBotName(config);
   const customMessages = getCustomMessages(config);
 
-  if (
-    !React.isValidElement(ActionProvider({})) &&
-    !React.isValidElement(MessageParser({}))
-  ) {
+  if (isConstructor(ActionProvider) && isConstructor(MessageParser)) {
     return (
       <Chat
         state={state}
