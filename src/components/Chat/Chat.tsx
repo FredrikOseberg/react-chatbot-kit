@@ -39,6 +39,7 @@ interface IChatProps {
   disableScrollToBottom: boolean;
   messageHistory: IMessage[] | string;
   parse?: (message: string) => void;
+  actions?: object;
 }
 
 const Chat = ({
@@ -58,11 +59,10 @@ const Chat = ({
   setMessageContainerRef,
   disableScrollToBottom,
   messageHistory,
+  actions,
 }: IChatProps) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
-
-  console.log(parse);
 
   const [input, setInputValue] = useState('');
 
@@ -132,6 +132,7 @@ const Chat = ({
       scrollIntoView,
       actionProvider,
       payload: messageObject.payload,
+      actions,
     };
 
     if (messageObject.widget) {
@@ -139,6 +140,7 @@ const Chat = ({
         ...state,
         scrollIntoView,
         payload: messageObject.payload,
+        actions,
       });
       return (
         <>
@@ -156,6 +158,7 @@ const Chat = ({
       ...state,
       scrollIntoView,
       payload: messageObject.payload,
+      actions,
     });
     return (
       <>
@@ -184,6 +187,7 @@ const Chat = ({
       customComponents,
       widgetRegistry,
       messages,
+      actions,
     };
 
     if (messageObject.widget) {
@@ -191,6 +195,7 @@ const Chat = ({
         ...state,
         scrollIntoView,
         payload: messageObject.payload,
+        actions,
       });
       return (
         <>

@@ -19,6 +19,8 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     state?: undefined;
     setState?: undefined;
     setMessageContainerRef?: undefined;
+    ActionProvider?: undefined;
+    MessageParser?: undefined;
 } | {
     invalidPropsError: string;
     configurationError?: undefined;
@@ -28,6 +30,8 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     state?: undefined;
     setState?: undefined;
     setMessageContainerRef?: undefined;
+    ActionProvider?: undefined;
+    MessageParser?: undefined;
 } | {
     widgetRegistry: WidgetRegistry;
     actionProv: any;
@@ -37,5 +41,7 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     state: any;
     setState: React.Dispatch<any>;
     setMessageContainerRef: React.Dispatch<any>;
+    ActionProvider: any;
+    MessageParser: any;
 };
 export default useChatbot;

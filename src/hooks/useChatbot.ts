@@ -105,11 +105,13 @@ const useChatbot = ({
   let messagePars;
   let widgets;
 
+  const ActionProvider = actionProvider;
+  const MessageParser = messageParser;
+
   if (
-    !(typeof actionProvider === 'function') &&
-    !(typeof messageParser === 'function')
+    !React.isValidElement(ActionProvider({})) &&
+    !React.isValidElement(MessageParser({}))
   ) {
-    console.log('NOT REACT COMPONENT');
     actionProv = new actionProvider(
       createChatBotMessage,
       setState,
@@ -127,7 +129,6 @@ const useChatbot = ({
       widgetRegistry?.addWidget(widget, rest)
     );
   } else {
-    console.log('REACT COMPONENT');
     actionProv = actionProvider;
     messagePars = messageParser;
     widgetRegistry = new WidgetRegistry(setState, null);
@@ -147,6 +148,8 @@ const useChatbot = ({
     state,
     setState,
     setMessageContainerRef,
+    ActionProvider,
+    MessageParser,
   };
 };
 

@@ -46,8 +46,8 @@ const Chatbot = ({
   const {
     configurationError,
     invalidPropsError,
-    actionProv,
-    messagePars,
+    ActionProvider,
+    MessageParser,
     widgetRegistry,
     state,
     setState,
@@ -76,16 +76,16 @@ const Chatbot = ({
   const customMessages = getCustomMessages(config);
 
   if (
-    !(typeof actionProv === 'function') &&
-    !(typeof messagePars === 'function')
+    !React.isValidElement(ActionProvider({})) &&
+    !React.isValidElement(MessageParser({}))
   ) {
     return (
       <Chat
         state={state}
         setState={setState}
         widgetRegistry={widgetRegistry}
-        actionProvider={actionProv}
-        messageParser={messagePars}
+        actionProvider={ActionProvider}
+        messageParser={MessageParser}
         customMessages={customMessages}
         customComponents={{ ...customComponents }}
         botName={botName}
@@ -99,22 +99,18 @@ const Chatbot = ({
       />
     );
   } else {
-    const ActionComponent = actionProv;
-    const MessageComponent = messagePars;
-
-    console.log(MessageComponent);
     return (
-      <ActionComponent
+      <ActionProvider
         setState={setState}
         createChatBotMessage={createChatBotMessage}
       >
-        <MessageComponent>
+        <MessageParser>
           <Chat
             state={state}
             setState={setState}
             widgetRegistry={widgetRegistry}
-            actionProvider={actionProv}
-            messageParser={messagePars}
+            actionProvider={ActionProvider}
+            messageParser={MessageParser}
             customMessages={customMessages}
             customComponents={{ ...customComponents }}
             botName={botName}
@@ -126,8 +122,8 @@ const Chatbot = ({
             messageHistory={messageHistory}
             disableScrollToBottom={disableScrollToBottom}
           />
-        </MessageComponent>
-      </ActionComponent>
+        </MessageParser>
+      </ActionProvider>
     );
   }
 };
