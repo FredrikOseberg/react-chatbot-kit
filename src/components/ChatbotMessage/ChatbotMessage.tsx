@@ -33,6 +33,7 @@ const ChatbotMessage = ({
   const [show, toggleShow] = useState(false);
 
   useEffect(() => {
+    let timeoutId: any;
     const disableLoading = (
       messages: any[],
       setState: React.Dispatch<React.SetStateAction<any>>
@@ -40,7 +41,7 @@ const ChatbotMessage = ({
       let defaultDisableTime = 750;
       if (delay) defaultDisableTime += delay;
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         const newMessages = [...messages];
         const message = newMessages.find((message) => message.id === id);
 
@@ -61,6 +62,9 @@ const ChatbotMessage = ({
     };
 
     disableLoading(messages, setState);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [delay, id]);
 
   useEffect(() => {
