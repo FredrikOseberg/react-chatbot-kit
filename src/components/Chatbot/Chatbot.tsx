@@ -50,6 +50,8 @@ const Chatbot = ({
     ActionProvider,
     MessageParser,
     widgetRegistry,
+    actionProv,
+    messagePars,
     state,
     setState,
     setMessageContainerRef,
@@ -82,8 +84,8 @@ const Chatbot = ({
         state={state}
         setState={setState}
         widgetRegistry={widgetRegistry}
-        actionProvider={ActionProvider}
-        messageParser={MessageParser}
+        actionProvider={actionProv}
+        messageParser={messagePars}
         customMessages={customMessages}
         customComponents={{ ...customComponents }}
         botName={botName}
