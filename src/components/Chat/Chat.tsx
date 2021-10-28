@@ -242,7 +242,6 @@ const Chat = ({
       if (parse) {
         return parse(input);
       }
-      console.log(messageParser);
       messageParser.parse(input);
     }
   };
