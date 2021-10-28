@@ -7,3 +7,4 @@ export declare const getBotName: (config: IConfig) => string;
 export declare const getObject: (object: Object) => Object;
 export declare const getCustomMessages: (config: IConfig) => import("../../interfaces/IConfig").ICustomMessage;
 export declare const validateProps: (config: IConfig, MessageParser: any) => string[];
+export declare const isConstructor: (func: any) => boolean;

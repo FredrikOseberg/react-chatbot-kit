@@ -11,10 +11,12 @@ import {
   getCustomComponents,
   getBotName,
   getCustomMessages,
+  isConstructor,
 } from './utils';
 
 import useChatbot from '../../hooks/useChatbot';
 import { IMessage } from '../../interfaces/IMessages';
+import { createChatBotMessage } from '../..';
 
 interface IChatbotProps {
   actionProvider: any;
@@ -45,8 +47,8 @@ const Chatbot = ({
   const {
     configurationError,
     invalidPropsError,
-    actionProv,
-    messagePars,
+    ActionProvider,
+    MessageParser,
     widgetRegistry,
     state,
     setState,
@@ -74,25 +76,54 @@ const Chatbot = ({
   const botName = getBotName(config);
   const customMessages = getCustomMessages(config);
 
-  return (
-    <Chat
-      state={state}
-      setState={setState}
-      widgetRegistry={widgetRegistry}
-      actionProvider={actionProv}
-      messageParser={messagePars}
-      customMessages={customMessages}
-      customComponents={{ ...customComponents }}
-      botName={botName}
-      customStyles={{ ...customStyles }}
-      headerText={headerText}
-      placeholderText={placeholderText}
-      setMessageContainerRef={setMessageContainerRef}
-      validator={validator}
-      messageHistory={messageHistory}
-      disableScrollToBottom={disableScrollToBottom}
-    />
-  );
+  if (isConstructor(ActionProvider) && isConstructor(MessageParser)) {
+    return (
+      <Chat
+        state={state}
+        setState={setState}
+        widgetRegistry={widgetRegistry}
+        actionProvider={ActionProvider}
+        messageParser={MessageParser}
+        customMessages={customMessages}
+        customComponents={{ ...customComponents }}
+        botName={botName}
+        customStyles={{ ...customStyles }}
+        headerText={headerText}
+        placeholderText={placeholderText}
+        setMessageContainerRef={setMessageContainerRef}
+        validator={validator}
+        messageHistory={messageHistory}
+        disableScrollToBottom={disableScrollToBottom}
+      />
+    );
+  } else {
+    return (
+      <ActionProvider
+        setState={setState}
+        createChatBotMessage={createChatBotMessage}
+      >
+        <MessageParser>
+          <Chat
+            state={state}
+            setState={setState}
+            widgetRegistry={widgetRegistry}
+            actionProvider={ActionProvider}
+            messageParser={MessageParser}
+            customMessages={customMessages}
+            customComponents={{ ...customComponents }}
+            botName={botName}
+            customStyles={{ ...customStyles }}
+            headerText={headerText}
+            placeholderText={placeholderText}
+            setMessageContainerRef={setMessageContainerRef}
+            validator={validator}
+            messageHistory={messageHistory}
+            disableScrollToBottom={disableScrollToBottom}
+          />
+        </MessageParser>
+      </ActionProvider>
+    );
+  }
 };
 
 export default Chatbot;

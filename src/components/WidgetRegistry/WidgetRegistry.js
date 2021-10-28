@@ -18,18 +18,21 @@ class WidgetRegistry {
     };
   };
 
-  getWidget = (widgetName, state) => {
+  getWidget = (widgetName, options) => {
     const widgetObject = this[widgetName];
 
     if (!widgetObject) return;
 
     let props = {
-      scrollIntoView: state.scrollIntoView,
+      scrollIntoView: options.scrollIntoView,
       ...widgetObject.parentProps,
       ...getObject(widgetObject.props),
-      ...this.mapStateToProps(widgetObject.mapStateToProps, state),
+      ...this.mapStateToProps(widgetObject.mapStateToProps, options),
       setState: this.setState,
-      actionProvider: this.actionProvider,
+      actionProvider: this.actionProvider || options.actions,
+      actions: options.actions,
+      state: options,
+      payload: options.payload,
     };
 
     const widget = widgetObject.widget(props);

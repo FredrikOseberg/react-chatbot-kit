@@ -56,12 +56,21 @@ export const validateProps = (config: IConfig, MessageParser: any) => {
     );
   }
 
-  const messageParser = new MessageParser();
-  if (!messageParser['parse']) {
-    errors.push(
-      "Messageparser must implement the method 'parse', please add this method to your object. The signature is parse(message: string)."
-    );
-  }
+  // const messageParser = new MessageParser();
+  // if (!messageParser['parse']) {
+  //   errors.push(
+  //     "Messageparser must implement the method 'parse', please add this method to your object. The signature is parse(message: string)."
+  //   );
+  // }
 
   return errors;
+};
+
+export const isConstructor = (func: any) => {
+  try {
+    new func();
+  } catch (err) {
+    return false;
+  }
+  return true;
 };

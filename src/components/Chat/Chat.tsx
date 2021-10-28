@@ -38,6 +38,8 @@ interface IChatProps {
   setMessageContainerRef: React.Dispatch<SetStateAction<any>>;
   disableScrollToBottom: boolean;
   messageHistory: IMessage[] | string;
+  parse?: (message: string) => void;
+  actions?: object;
 }
 
 const Chat = ({
@@ -45,6 +47,7 @@ const Chat = ({
   setState,
   widgetRegistry,
   messageParser,
+  parse,
   customComponents,
   actionProvider,
   botName,
@@ -56,6 +59,7 @@ const Chat = ({
   setMessageContainerRef,
   disableScrollToBottom,
   messageHistory,
+  actions,
 }: IChatProps) => {
   const { messages } = state;
   const chatContainerRef = useRef(null);
@@ -127,12 +131,16 @@ const Chat = ({
       state,
       scrollIntoView,
       actionProvider,
+      payload: messageObject.payload,
+      actions,
     };
 
     if (messageObject.widget) {
       const widget = widgetRegistry.getWidget(messageObject.widget, {
         ...state,
         scrollIntoView,
+        payload: messageObject.payload,
+        actions,
       });
       return (
         <>
@@ -149,6 +157,8 @@ const Chat = ({
     const widget = widgetRegistry.getWidget(messageObject.widget, {
       ...state,
       scrollIntoView,
+      payload: messageObject.payload,
+      actions,
     });
     return (
       <>
@@ -177,12 +187,15 @@ const Chat = ({
       customComponents,
       widgetRegistry,
       messages,
+      actions,
     };
 
     if (messageObject.widget) {
       const widget = widgetRegistry.getWidget(chatbotMessageProps.widget, {
         ...state,
         scrollIntoView,
+        payload: messageObject.payload,
+        actions,
       });
       return (
         <>
@@ -219,10 +232,16 @@ const Chat = ({
     if (validator && typeof validator === 'function') {
       if (validator(input)) {
         handleValidMessage();
+        if (parse) {
+          return parse(input);
+        }
         messageParser.parse(input);
       }
     } else {
       handleValidMessage();
+      if (parse) {
+        return parse(input);
+      }
       messageParser.parse(input);
     }
   };

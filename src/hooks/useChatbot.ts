@@ -8,6 +8,7 @@ import {
   getCustomStyles,
   getInitialState,
   getWidgets,
+  isConstructor,
   validateProps,
 } from '../components/Chatbot/utils';
 import WidgetRegistry from '../components/WidgetRegistry/WidgetRegistry';
@@ -100,20 +101,41 @@ const useChatbot = ({
     stateRef.current = state;
   }, [state]);
 
-  const actionProv = new actionProvider(
-    createChatBotMessage,
-    setState,
-    createClientMessage,
-    stateRef.current,
-    createCustomMessage,
-    rest
-  );
+  let actionProv;
+  let widgetRegistry: WidgetRegistry;
+  let messagePars;
+  let widgets;
 
-  const widgetRegistry = new WidgetRegistry(setState, actionProv);
-  const messagePars = new messageParser(actionProv, stateRef.current);
+  const ActionProvider = actionProvider;
+  const MessageParser = messageParser;
 
-  const widgets = getWidgets(config);
-  widgets.forEach((widget: IWidget) => widgetRegistry.addWidget(widget, rest));
+  if (isConstructor(ActionProvider) && isConstructor(MessageParser)) {
+    actionProv = new actionProvider(
+      createChatBotMessage,
+      setState,
+      createClientMessage,
+      stateRef.current,
+      createCustomMessage,
+      rest
+    );
+
+    widgetRegistry = new WidgetRegistry(setState, actionProv);
+    messagePars = new messageParser(actionProv, stateRef.current);
+
+    widgets = getWidgets(config);
+    widgets.forEach((widget: IWidget) =>
+      widgetRegistry?.addWidget(widget, rest)
+    );
+  } else {
+    actionProv = actionProvider;
+    messagePars = messageParser;
+    widgetRegistry = new WidgetRegistry(setState, null);
+
+    widgets = getWidgets(config);
+    widgets.forEach((widget: IWidget) =>
+      widgetRegistry?.addWidget(widget, rest)
+    );
+  }
 
   return {
     widgetRegistry,
@@ -124,6 +146,8 @@ const useChatbot = ({
     state,
     setState,
     setMessageContainerRef,
+    ActionProvider,
+    MessageParser,
   };
 };
 
