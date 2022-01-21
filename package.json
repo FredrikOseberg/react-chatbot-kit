@@ -6,8 +6,6 @@
   "main": "build/index.js",
   "types": "build/src/index.d.ts",
   "dependencies": {
-    "classnames": "^2.2.6",
-    "css-loader": "^3.5.1",
     "react-conditionally-render": "^1.0.2"
   },
   "scripts": {
@@ -22,6 +20,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.21",
+    "css-loader": "^3.5.1",
     "mini-css-extract-plugin": "^1.4.0",
     "react-svg-loader": "^3.0.3",
     "style-loader": "^1.1.3",
