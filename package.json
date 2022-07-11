@@ -1,10 +1,6 @@
 {
   "name": "react-chatbot-kit",
-<<<<<<< HEAD
   "version": "2.1.2",
-=======
-  "version": "2.1.0-beta.2",
->>>>>>> da7bc11 (2.1.0-beta.2)
   "homepage": "https://fredrikoseberg.github.io/react-chatbot-kit-docs/",
   "description": "Fully customizable chatbot kit for react.",
   "main": "build/index.js",
