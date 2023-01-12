@@ -27,11 +27,19 @@ export interface ICustomMessage {
 
 export interface ICustomStyles {
   botMessageBox?: IBackgroundColor;
+  borMessageText?: IColor;
   chatButton?: IBackgroundColor;
+  chatInput?: IBackgroundColor;
+  chatInputText?: IColor;
+  userMessageBox?: IBackgroundColor;
+  userMessageText?: IColor;
 }
 
-interface IBackgroundColor {
+export interface IBackgroundColor {
   backgroundColor: string;
+}
+export interface IColor {
+  color: string;
 }
 
 export default IConfig;

@@ -163,6 +163,8 @@ const Chat = ({
     return (
       <>
         <UserChatMessage
+          userMessageBox={customStyles.botMessageBox}
+          userMessageText={customStyles.userMessageText}
           message={messageObject.message}
           key={messageObject.id}
           customComponents={customComponents}
