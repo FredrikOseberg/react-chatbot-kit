@@ -188,6 +188,7 @@ const Chat = ({
       widgetRegistry,
       messages,
       actions,
+      actionProvider,
     };
 
     if (messageObject.widget) {
