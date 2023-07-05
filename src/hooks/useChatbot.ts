@@ -54,7 +54,11 @@ const useChatbot = ({
 
     return { invalidPropsError };
   }
-  const [messageContainerRef, setMessageContainerRef] = useState<any>({});
+  const [messageContainer, setMessageContainer] = useState<any>({});
+
+  const setMessageContainerRef = (containerRef: any) => {
+    setMessageContainer(containerRef)
+  }
 
   const initialState = getInitialState(config);
 
@@ -89,13 +93,13 @@ const useChatbot = ({
   useEffect(() => {
     return () => {
       if (saveMessages && typeof saveMessages === 'function') {
-        const HTML = messageContainerRef?.current?.innerHTML.toString();
+        const HTML = messageContainer?.current?.innerHTML.toString();
 
-        if (!messageContainerRef.current) return;
+        if (!messageContainer.current) return;
         saveMessages(messagesRef.current, HTML);
       }
     };
-  }, [messageContainerRef.current]);
+  }, [messageContainer.current]);
 
   useEffect(() => {
     stateRef.current = state;
