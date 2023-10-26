@@ -46,7 +46,7 @@ export const createChatBotMessage = (
   return {
     ...createChatMessage(message, 'bot'),
     ...options,
-    loading: true,
+    loading: options.loading !== undefined ? options.loading : true,
   };
 };
 
