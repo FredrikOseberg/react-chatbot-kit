@@ -101,6 +101,7 @@ const Chatbot = ({
   } else {
     return (
       <ActionProvider
+        state={state}
         setState={setState}
         createChatBotMessage={createChatBotMessage}
       >
