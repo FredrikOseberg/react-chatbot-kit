@@ -18,6 +18,9 @@
     "name": "Fredrik Strand Oseberg",
     "email": "fredrik.no@gmail.com"
   },
+  "files": [
+    "build/*.css"
+  ],
   "devDependencies": {
     "@types/react": "^17.0.21",
     "css-loader": "^3.5.1",
