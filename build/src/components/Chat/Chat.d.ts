@@ -15,11 +15,11 @@ interface IChatProps {
     placeholderText: string;
     validator: (input: string) => Boolean;
     state: any;
-    setMessageContainerRef: React.Dispatch<SetStateAction<any>>;
     disableScrollToBottom: boolean;
     messageHistory: IMessage[] | string;
     parse?: (message: string) => void;
     actions?: object;
+    messageContainerRef: React.MutableRefObject<HTMLDivElement>;
 }
-declare const Chat: ({ state, setState, widgetRegistry, messageParser, parse, customComponents, actionProvider, botName, customStyles, headerText, customMessages, placeholderText, validator, setMessageContainerRef, disableScrollToBottom, messageHistory, actions, }: IChatProps) => JSX.Element;
+declare const Chat: ({ state, setState, widgetRegistry, messageParser, parse, customComponents, actionProvider, botName, customStyles, headerText, customMessages, placeholderText, validator, disableScrollToBottom, messageHistory, actions, messageContainerRef, }: IChatProps) => JSX.Element;
 export default Chat;

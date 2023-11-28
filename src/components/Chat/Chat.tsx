@@ -35,11 +35,11 @@ interface IChatProps {
   placeholderText: string;
   validator: (input: string) => Boolean;
   state: any;
-  setMessageContainerRef: React.Dispatch<SetStateAction<any>>;
   disableScrollToBottom: boolean;
   messageHistory: IMessage[] | string;
   parse?: (message: string) => void;
   actions?: object;
+  messageContainerRef: React.MutableRefObject<HTMLDivElement>;
 }
 
 const Chat = ({
@@ -56,21 +56,20 @@ const Chat = ({
   customMessages,
   placeholderText,
   validator,
-  setMessageContainerRef,
   disableScrollToBottom,
   messageHistory,
   actions,
+  messageContainerRef,
 }: IChatProps) => {
   const { messages } = state;
-  const chatContainerRef = useRef(null);
 
   const [input, setInputValue] = useState('');
 
   const scrollIntoView = () => {
     setTimeout(() => {
-      if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTop =
-          chatContainerRef?.current?.scrollHeight;
+      if (messageContainerRef.current) {
+        messageContainerRef.current.scrollTop =
+          messageContainerRef?.current?.scrollHeight;
       }
     }, 50);
   };
@@ -79,10 +78,6 @@ const Chat = ({
     if (disableScrollToBottom) return;
     scrollIntoView();
   });
-
-  useEffect(() => {
-    setMessageContainerRef(chatContainerRef);
-  }, [chatContainerRef.current]);
 
   const showAvatar = (messages: any[], index: number) => {
     if (index === 0) return true;
@@ -286,7 +281,7 @@ const Chat = ({
 
         <div
           className="react-chatbot-kit-chat-message-container"
-          ref={chatContainerRef}
+          ref={messageContainerRef}
         >
           <ConditionallyRender
             condition={

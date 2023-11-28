@@ -18,7 +18,7 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     messagePars?: undefined;
     state?: undefined;
     setState?: undefined;
-    setMessageContainerRef?: undefined;
+    messageContainerRef?: undefined;
     ActionProvider?: undefined;
     MessageParser?: undefined;
 } | {
@@ -29,7 +29,7 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     messagePars?: undefined;
     state?: undefined;
     setState?: undefined;
-    setMessageContainerRef?: undefined;
+    messageContainerRef?: undefined;
     ActionProvider?: undefined;
     MessageParser?: undefined;
 } | {
@@ -40,7 +40,7 @@ declare const useChatbot: ({ config, actionProvider, messageParser, messageHisto
     invalidPropsError: string;
     state: any;
     setState: React.Dispatch<any>;
-    setMessageContainerRef: React.Dispatch<any>;
+    messageContainerRef: React.MutableRefObject<HTMLDivElement>;
     ActionProvider: any;
     MessageParser: any;
 };
