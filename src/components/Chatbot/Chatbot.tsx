@@ -50,11 +50,11 @@ const Chatbot = ({
     ActionProvider,
     MessageParser,
     widgetRegistry,
+    messageContainerRef,
     actionProv,
     messagePars,
     state,
     setState,
-    setMessageContainerRef,
   } = useChatbot({
     config,
     actionProvider,
@@ -92,10 +92,10 @@ const Chatbot = ({
         customStyles={{ ...customStyles }}
         headerText={headerText}
         placeholderText={placeholderText}
-        setMessageContainerRef={setMessageContainerRef}
         validator={validator}
         messageHistory={messageHistory}
         disableScrollToBottom={disableScrollToBottom}
+        messageContainerRef={messageContainerRef}
       />
     );
   } else {
@@ -118,10 +118,10 @@ const Chatbot = ({
             customStyles={{ ...customStyles }}
             headerText={headerText}
             placeholderText={placeholderText}
-            setMessageContainerRef={setMessageContainerRef}
             validator={validator}
             messageHistory={messageHistory}
             disableScrollToBottom={disableScrollToBottom}
+            messageContainerRef={messageContainerRef}
           />
         </MessageParser>
       </ActionProvider>

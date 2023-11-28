@@ -5,7 +5,6 @@ import {
   createCustomMessage,
 } from '../components/Chat/chatUtils';
 import {
-  getCustomStyles,
   getInitialState,
   getWidgets,
   isConstructor,
@@ -54,7 +53,6 @@ const useChatbot = ({
 
     return { invalidPropsError };
   }
-  const [messageContainerRef, setMessageContainerRef] = useState<any>({});
 
   const initialState = getInitialState(config);
 
@@ -72,6 +70,7 @@ const useChatbot = ({
   });
   const messagesRef = React.useRef(state.messages);
   const stateRef = React.useRef();
+  const messageContainerRef: React.MutableRefObject<HTMLDivElement> = React.useRef();
 
   useEffect(() => {
     messagesRef.current = state.messages;
@@ -87,15 +86,16 @@ const useChatbot = ({
   }, []);
 
   useEffect(() => {
+    const refValue: HTMLDivElement = messageContainerRef.current;
+
     return () => {
       if (saveMessages && typeof saveMessages === 'function') {
-        const HTML = messageContainerRef?.current?.innerHTML.toString();
+        const HTML = refValue.innerHTML.toString();
 
-        if (!messageContainerRef.current) return;
         saveMessages(messagesRef.current, HTML);
       }
     };
-  }, [messageContainerRef.current]);
+  }, []);
 
   useEffect(() => {
     stateRef.current = state;
@@ -145,7 +145,7 @@ const useChatbot = ({
     invalidPropsError,
     state,
     setState,
-    setMessageContainerRef,
+    messageContainerRef,
     ActionProvider,
     MessageParser,
   };
