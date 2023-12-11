@@ -43,11 +43,14 @@ const ChatbotMessage = ({
 
       timeoutId = setTimeout(() => {
         const newMessages = [...messages];
-        const message = newMessages.find((message) => message.id === id);
+        let message = newMessages.find((message) => message.id === id);
 
         if (!message) return;
-        message.loading = false;
-        message.delay = undefined;
+        message = {
+          ...message,
+          loading: false,
+          delay: undefined,
+        }
 
         setState((state: any) => {
           const freshMessages = state.messages;
