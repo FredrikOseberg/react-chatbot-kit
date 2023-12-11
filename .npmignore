@@ -1,0 +1,9 @@
+.gitignore
+.github
+.gitlab-ci.yml
+.npmignore
+.prettierrc
+skybot.gif
+tsconfig.json
+webpack.config.js
+yarn.lock
