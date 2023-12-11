@@ -42,25 +42,15 @@ const ChatbotMessage = ({
       if (delay) defaultDisableTime += delay;
 
       timeoutId = setTimeout(() => {
-        const newMessages = [...messages];
-        let message = newMessages.find((message) => message.id === id);
+        const newMessages = [...messages].map(message => {
+          if (message.id === id) {
+            return {...message, loading: false, delay: undefined};
+          }
 
-        if (!message) return;
-        message = {
-          ...message,
-          loading: false,
-          delay: undefined,
-        }
-
-        setState((state: any) => {
-          const freshMessages = state.messages;
-          const messageIdx = freshMessages.findIndex(
-            (message: any) => message.id === id
-          );
-          freshMessages[messageIdx] = message;
-
-          return { ...state, messages: freshMessages };
+          return message;
         });
+
+        setState((state: any) => ({...state, messages: newMessages}));
       }, defaultDisableTime);
     };
 
