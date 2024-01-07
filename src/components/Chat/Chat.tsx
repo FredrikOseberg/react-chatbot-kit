@@ -177,6 +177,7 @@ const Chat = ({
 
     const chatbotMessageProps = {
       ...messageObject,
+      payload: messageObject.payload,
       setState,
       state,
       customComponents,
